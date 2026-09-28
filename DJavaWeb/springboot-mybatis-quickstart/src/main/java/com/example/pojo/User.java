@@ -1,5 +1,15 @@
 package com.example.pojo;
 
+import lombok.*;
+
+// @Getter
+// @Setter
+// @ToString
+// @EqualsAndHashCode
+
+@Data
+@NoArgsConstructor // 无参构造
+@AllArgsConstructor // 全参构造
 public class User {
     private Integer id;
     private String name;
@@ -7,7 +17,7 @@ public class User {
     private Short gender;
     private String phone;
 
-    public User() {
+    /* public User() {
     }
 
     public User(Integer id, String name, Short age, Short gender, String phone) {
@@ -67,5 +77,5 @@ public class User {
                 ", gender=" + gender +
                 ", phone='" + phone + '\'' +
                 '}';
-    }
+    } */
 }

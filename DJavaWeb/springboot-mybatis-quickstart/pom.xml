@@ -48,6 +48,12 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.2.28</version>
         </dependency>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
