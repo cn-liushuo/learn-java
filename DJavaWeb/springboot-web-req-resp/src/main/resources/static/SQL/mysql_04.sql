@@ -544,3 +544,22 @@ from tb_dept;
 
 select *
 from tb_emp;
+
+
+-- ========================== 索引 ==========================
+select *
+from tb_sku where sn = "1000000000003145003";
+
+select count(*) from tb_sku;
+
+create index idx_sku_sn on tb_sku(sn);
+
+
+-- 创建：为 tb_emp 表的 name 字段建立一个索引
+create index idx_emp_name on tb_emp(name);
+
+-- 查询：查询 tb_emp 表的索引信息
+show index from tb_emp;
+
+-- 删除：删除 eb_emp 表中的 name 字段的索引
+drop index idx_emp_name on tb_emp;
