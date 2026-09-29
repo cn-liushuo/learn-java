@@ -3,6 +3,9 @@ package com.example.mapper;
 import com.example.pojo.Emp;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Mapper
 public interface EmpMapper {
 
@@ -38,5 +41,16 @@ public interface EmpMapper {
     // })
     // @Select("select * from emp where id = #{id}")
     // public Emp getById(Integer id);
+
+    // 条件查询员工
+    // @Select("select * from emp where name like  '%${name}%' and gender = #{gender} and " +
+    //         "entrydate between #{begin} and #{end} order by update_time desc")
+    // public List<Emp> list(@Param("name") String name, @Param("gender") Short gender,
+    //                       @Param("begin") LocalDate begin, @Param("end") LocalDate end);
+
+    @Select("select * from emp where name like concat('%', #{name}, '%') and gender = #{gender} and " +
+            "entrydate between #{begin} and #{end} order by update_time desc")
+    public List<Emp> list(@Param("name") String name, @Param("gender") Short gender,
+                          @Param("begin") LocalDate begin, @Param("end") LocalDate end);
 
 }

@@ -87,3 +87,23 @@ where id = 1;
 select *
 from emp
 where id = 20;
+
+
+-- 条件查询员工
+select *
+from emp
+where name like '%张%'
+  and gender = 1
+  and entrydate between '2010-01-01' and '2020-01-01'
+order by update_time desc;
+
+
+-- concat 字符串拼接函数
+select concat('hello', 'mysql', 'world');
+
+select *
+from emp
+where name like concat('%', '张', '%')
+  and gender = 1
+  and entrydate between '2010-01-01' and '2020-01-01'
+order by update_time desc;
