@@ -81,3 +81,9 @@ set username    = '',
     dept_id     = '',
     update_time = now()
 where id = 1;
+
+
+-- 根据 ID 查询员工
+select *
+from emp
+where id = 20;
