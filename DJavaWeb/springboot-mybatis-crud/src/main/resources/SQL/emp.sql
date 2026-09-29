@@ -68,3 +68,16 @@ where username = 'zhangwuji'
 -- 插入数据
 insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
 VALUES ('Tom', '汤姆', 1, '1.jpg', 1, '2005-01-01', 1, now(), now());
+
+
+-- 更新数据
+update emp
+set username    = '',
+    name        = '',
+    gender      = '',
+    image       = '',
+    job         = '',
+    entrydate   = '',
+    dept_id     = '',
+    update_time = now()
+where id = 1;

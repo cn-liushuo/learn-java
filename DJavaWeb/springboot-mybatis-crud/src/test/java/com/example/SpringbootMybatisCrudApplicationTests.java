@@ -41,4 +41,22 @@ class SpringbootMybatisCrudApplicationTests {
         System.out.println(emp.getId());
     }
 
+    @Test
+    public void testUpdate() {
+        // 构造员工对象
+        Emp emp = new Emp();
+        emp.setId(18);
+        emp.setUsername("Tom1");
+        emp.setName("汤姆1");
+        emp.setImage("1.jpg");
+        emp.setGender((short) 1);
+        emp.setJob((short) 1);
+        emp.setEntrydate(LocalDate.of(2000, 1, 1));
+        emp.setUpdateTime(LocalDateTime.now());
+        emp.setDeptId(1);
+
+        // 执行更新员工操作
+        empMapper.update(emp);
+    }
+
 }
