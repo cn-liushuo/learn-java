@@ -63,3 +63,8 @@ select count(*)
 from emp
 where username = 'zhangwuji'
   and password = '123456';
+
+
+-- 插入数据
+insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+VALUES ('Tom', '汤姆', 1, '1.jpg', 1, '2005-01-01', 1, now(), now());
