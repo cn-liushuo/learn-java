@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -70,8 +71,34 @@ class SpringbootMybatisCrudApplicationTests {
     // 根据条件查询员工
     @Test
     public void testList() {
-        List<Emp> empList = empMapper.list("张", (short) 1, LocalDate.of(2010, 1, 1), LocalDate.of(2020, 1, 1));
+        // List<Emp> empList = empMapper.list("张", (short) 1, LocalDate.of(2010, 1, 1), LocalDate.of(2020, 1, 1));
+        // List<Emp> empList = empMapper.list("张", null, null, null);
+        // List<Emp> empList = empMapper.list("张", (short) 1, null, null);
+        // List<Emp> empList = empMapper.list(null, (short) 1, null, null);
+        List<Emp> empList = empMapper.list(null, null, null, null);
         System.out.println(empList);
+    }
+
+    // 动态更新员工 - 更新ID为18的员工 username 更新为 'Tom111'，name更新为 '汤姆111'，gender 更新为 2
+    @Test
+    public void testUpdate2() {
+        // 构造员工对象
+        Emp emp = new Emp();
+        emp.setId(20);
+        emp.setUsername("Tom222333");
+        // emp.setName("汤姆222");
+        // emp.setGender((short) 2);
+        // emp.setUpdateTime(LocalDateTime.now());
+
+        // 执行更新员工操作
+        empMapper.update2(emp);
+    }
+
+    // 批量删除员工 - 13,14,15
+    @Test
+    public void testDeleteByIds() {
+        List<Integer> ids = Arrays.asList(13, 14, 15);
+        empMapper.deleteByIds(ids);
     }
 
 }

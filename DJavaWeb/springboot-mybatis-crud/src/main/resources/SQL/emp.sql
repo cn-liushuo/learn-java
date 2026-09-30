@@ -107,3 +107,7 @@ where name like concat('%', '张', '%')
   and gender = 1
   and entrydate between '2010-01-01' and '2020-01-01'
 order by update_time desc;
+
+
+-- 批量删除 18，20，21
+delete from emp where id in (18, 20, 21);

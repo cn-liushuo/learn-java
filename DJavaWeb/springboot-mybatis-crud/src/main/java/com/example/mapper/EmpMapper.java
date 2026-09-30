@@ -53,7 +53,14 @@ public interface EmpMapper {
     // public List<Emp> list(@Param("name") String name, @Param("gender") Short gender,
     //                       @Param("begin") LocalDate begin, @Param("end") LocalDate end);
 
+    // 动态条件查询
     public List<Emp> list(@Param("name") String name, @Param("gender") Short gender,
                           @Param("begin") LocalDate begin, @Param("end") LocalDate end);
+
+    // 动态更新员工信息
+    public void update2(Emp emp);
+
+    // 批量删除员工
+    public void deleteByIds(@Param("ids") List<Integer> ids);
 
 }
