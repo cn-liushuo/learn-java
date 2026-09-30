@@ -18,6 +18,9 @@
         <module>http-server-demo</module>
         <module>springboot-web-quickstart2</module>
         <module>springboot-web-req-resp</module>
+        <module>springboot-mybatis-quickstart</module>
+        <module>springboot-mybatis-crud</module>
+        <module>tlias-web-management</module>
     </modules>
 
     <properties>
