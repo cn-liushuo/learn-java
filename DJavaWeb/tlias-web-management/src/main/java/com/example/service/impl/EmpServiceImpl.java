@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.itheima.service.EmpService;
+import com.example.service.EmpService;
 import org.springframework.stereotype.Service;
 
 @Service
