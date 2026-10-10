@@ -65,4 +65,30 @@ public class DeptController {
         deptService.add(dept);
         return Result.success();
     }
+
+    /**
+     * 根据id查询部门信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        log.info("根据id获取部门, {}", id);
+        // 调用 service 获取部门
+        Dept dept = deptService.getById(id);
+        return Result.success(dept);
+    }
+
+    /**
+     * 修改部门
+     * @param dept
+     * @return
+     */
+    @PutMapping
+    public Result update(@RequestBody Dept dept) {
+        log.info("修改部门, {}", dept);
+        // 调用 service 修改部门
+        deptService.update(dept);
+        return Result.success();
+    }
 }
