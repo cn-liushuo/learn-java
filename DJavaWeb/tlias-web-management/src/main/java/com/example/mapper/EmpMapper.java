@@ -2,7 +2,6 @@ package com.example.mapper;
 
 import com.example.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,8 +17,8 @@ public interface EmpMapper {
      *
      * @return
      */
-    @Select("select count(*) from emp;")
-    public Long count();
+    // @Select("select count(*) from emp;")
+    // public Long count();
 
     /**
      * 进行分页查询获取列表数据
@@ -28,7 +27,15 @@ public interface EmpMapper {
      * @param pageSize
      * @return
      */
-    @Select("select * from emp limit #{start},#{pageSize}")
-    public List<Emp> page(@Param("start") Integer start, @Param("pageSize") Integer pageSize);
+    // @Select("select * from emp limit #{start},#{pageSize}")
+    // public List<Emp> page(@Param("start") Integer start, @Param("pageSize") Integer pageSize);
+
+    /**
+     * 员工信息查询
+     *
+     * @return
+     */
+    @Select("select * from emp")
+    public List<Emp> list();
 
 }
