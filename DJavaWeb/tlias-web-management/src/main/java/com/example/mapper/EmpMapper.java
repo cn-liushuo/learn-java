@@ -2,8 +2,9 @@ package com.example.mapper;
 
 import com.example.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public interface EmpMapper {
      *
      * @return
      */
-    @Select("select * from emp")
-    public List<Emp> list();
+    // @Select("select * from emp")
+    public List<Emp> list(@Param("name") String name, @Param("gender") Short gender, @Param("begin") LocalDate begin, @Param("end") LocalDate end);
 
 }
