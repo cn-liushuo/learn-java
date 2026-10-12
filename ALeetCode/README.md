@@ -40,5 +40,4 @@ mvn compile
 
 ## 相关链接
 
-- 仓库总览：[../README.md](../README.md)
 - 建议先学完 [BJavaSEBasic](../BJavaSEBasic/README.md) 再刷题

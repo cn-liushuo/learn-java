@@ -4,7 +4,7 @@
 
 > 本目录为 **手写练习用 SQL**，不是 Spring Boot 运行时依赖。请在本地 MySQL 客户端（如命令行、Navicat、DataGrip）中执行。
 
-上级模块说明见 [DJavaWeb/README.md](../../../../../../README.md)。仓库总览见根目录 [README.md](../../../../../../../README.md)。
+上级模块说明见 [DJavaWeb/README.md](../../../../../../README.md)。
 
 ---
 
@@ -30,7 +30,6 @@
 | `数据库-MySQL-04.md` | 课程笔记：多表与综合内容 |
 | `MySQL数据类型.xlsx` | MySQL 常用数据类型对照参考 |
 | `assets/` | 课程笔记配图（gif / png） |
-| `README.md` | 本说明 |
 
 ---
 
@@ -86,6 +85,3 @@ mysql -u root -p
 |------|------|
 | 当前 | 纯 SQL：DDL + DML + DQL + 多表，为后续 JDBC、MyBatis 做准备 |
 | 后续（课程） | 在 Spring Boot 中接入数据源与持久层，替换当前 `emp.xml` 等内存/文件方案 |
-
-- 上级模块：[DJavaWeb/README.md](../../../../../../README.md)
-- 仓库总览：[README.md](../../../../../../../README.md)

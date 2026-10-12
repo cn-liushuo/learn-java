@@ -1,6 +1,6 @@
 # DJavaWeb
 
-JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模块、手写 HTTP Server、Spring Boot Web（快速入门 + 请求/响应 + 员工三层架构），以及 MySQL DDL / DML / DQL 基础练习。
+JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模块、手写 HTTP Server、Spring Boot Web（快速入门 + 请求/响应 + 员工三层架构）、MySQL DDL / DML / DQL 基础练习、MyBatis 入门与 CRUD，以及 Tlias 智能学习辅助系统。
 
 配套课程：[黑马程序员 JavaWeb 开发教程（Spring / MyBatis / SpringMVC / SpringBoot 全流程）](https://www.bilibili.com/video/BV1m84y1w7Tb/?spm_id_from=333.788.video.desc.click)
 
@@ -13,7 +13,7 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 1. **JDK 8**、**Maven 3.6.1+**
 2. IDE：IntelliJ IDEA / Eclipse
 3. **Node.js LTS**：仅 [vue-project](vue-project/README.md) 需要
-4. **MySQL 8.x**：仅练习 [static/SQL](springboot-web-req-resp/src/main/resources/static/SQL/README.md) 时需要
+4. **MySQL 8.x**：SQL 练习、MyBatis 两个工程、Tlias 需要。SQL 练习说明见 [static/SQL](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
 
 主要依赖：
 
@@ -22,6 +22,9 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 | `vue-project` | Vue `2.6`、Vue Router `3`、Element UI `2`、Axios |
 | `springboot-web-quickstart` | Spring Boot `2.6.13`（`spring-boot-starter-web`） |
 | `springboot-web-req-resp` | Spring Boot `2.7.6`、dom4j `2.1.3`（XML 解析） |
+| `springboot-mybatis-quickstart` | Spring Boot `2.6.13`、MyBatis `2.2.2`、Druid `1.2.28`、MySQL 驱动 |
+| `springboot-mybatis-crud` | Spring Boot `2.6.13`、MyBatis `2.2.2`、MySQL 驱动 |
+| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、MySQL 驱动 |
 
 ---
 
@@ -40,6 +43,9 @@ DJavaWeb/
 ├── springboot-web-quickstart/  # Spring Boot Web 快速入门
 ├── springboot-web-quickstart2/ # Spring Boot 脚手架练习
 ├── springboot-web-req-resp/    # 请求参数 / 统一响应 / 员工三层 + SQL 练习
+├── springboot-mybatis-quickstart/ # MyBatis 注解查询入门
+├── springboot-mybatis-crud/    # MyBatis 员工表增删改查
+├── tlias-web-management/       # Tlias：部门 CRUD + 员工分页
 └── pom.xml                     # 聚合父工程
 ```
 
@@ -58,6 +64,9 @@ DJavaWeb/
 | `springboot-web-quickstart` | Spring Boot Web、Controller、静态资源 |
 | `springboot-web-quickstart2` | Spring Boot 脚手架练习 |
 | `springboot-web-req-resp` | 请求参数绑定；`Result` 统一响应；员工列表三层架构；[MySQL 练习](springboot-web-req-resp/src/main/resources/static/SQL/README.md) |
+| `springboot-mybatis-quickstart` | MyBatis 注解查询 `user`；无 Web 依赖；库名 `mybatis` |
+| `springboot-mybatis-crud` | 员工表注解 / XML 增删改查；脚本 `SQL/emp.sql`；库名 `mybatis` |
+| `tlias-web-management` | 部门 CRUD（`/depts`）+ 员工分页（`GET /emps`）；PageHelper；脚本 `SQL/tlias.sql`；库名 `tlias`；前端静态资源在 `src/main/resources/FE/` |
 
 ---
 
@@ -135,6 +144,22 @@ mvn spring-boot:run
 
 与 Spring Boot 运行无关，详见：[static/SQL/README.md](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
 
+**MyBatis 入门与 CRUD**
+
+这两个工程没有 Web 依赖，不是 HTTP 服务。先在本地 MySQL 建库，再在 IDE 中运行对应启动类。连接信息写在各自 `application.properties`，按本机账号修改，文档不记录口令。
+
+1. `springboot-mybatis-quickstart`：执行 [mybatis.sql](springboot-mybatis-quickstart/src/main/resources/SQL/mybatis.sql)，创建库 `mybatis` 与 `user` 表。启动类：`com.example.SpringbootMybatisQuickstartApplication`。`UserMapper` 用注解查询全部用户。
+2. `springboot-mybatis-crud`：使用同一个库 `mybatis`，再执行 [emp.sql](springboot-mybatis-crud/src/main/resources/SQL/emp.sql) 准备部门 / 员工表。启动类：`com.example.SpringbootMybatisCrudApplication`。`EmpMapper` 用注解与 XML 做增删改查。
+
+**Tlias 智能学习辅助系统**
+
+1. 执行 [tlias.sql](tlias-web-management/src/main/resources/SQL/tlias.sql)，创建库 `tlias` 及部门 / 员工表
+2. 在 `tlias-web-management` 目录执行：`mvn spring-boot:run`（默认端口 `8080`）
+3. 接口入口：`/depts`（部门增删改查）、`GET /emps`（员工分页）。字段与示例见 [API 接口文档](tlias-web-management/src/main/resources/API/api接口文档.md)
+4. 配套前端静态资源在 `src/main/resources/FE/`
+
+`springboot-web-quickstart`、`springboot-web-quickstart2`、`springboot-web-req-resp`、`tlias-web-management` 与手写 HTTP Server 都默认占用 `8080`，不要同时启动。
+
 ---
 
 ## 使用说明
@@ -150,13 +175,16 @@ mvn spring-boot:run
 | `springboot-web-quickstart/` | 运行启动类；`HelloController` 提供 `/hello` |
 | `springboot-web-quickstart2/` | Spring Boot 脚手架练习工程 |
 | `springboot-web-req-resp/` | 参数绑定、统一响应、员工列表；`static/SQL` 为 MySQL 练习 |
+| `springboot-mybatis-quickstart/` | 先执行 `mybatis.sql`，再运行启动类；注解查询 `user` |
+| `springboot-mybatis-crud/` | 在库 `mybatis` 中执行 `emp.sql`，再运行启动类；员工表增删改查 |
+| `tlias-web-management/` | 先执行 `tlias.sql`，再 `mvn spring-boot:run`；部门与员工接口见 API 文档 |
 
-建议学习顺序：前端静态页 → Vue → Maven → HTTP Server → Spring Boot 快速入门 → 请求/响应与三层架构 → MySQL SQL 练习。
+建议学习顺序：前端静态页 → Vue → Maven → HTTP Server → Spring Boot 快速入门 → 请求/响应与三层架构 → MySQL SQL 练习 → MyBatis 入门 → MyBatis CRUD → Tlias。
 
 ---
 
 ## 相关链接
 
-- 仓库总览：[../README.md](../README.md)
 - Vue 子项目：[vue-project/README.md](vue-project/README.md)
 - MySQL 练习：[static/SQL/README.md](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
+- Tlias 接口：[api接口文档.md](tlias-web-management/src/main/resources/API/api接口文档.md)

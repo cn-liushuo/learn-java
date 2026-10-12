@@ -41,10 +41,3 @@ npm run serve
 | `/emp` | 员工管理 |
 
 配置细节可参考 [Vue CLI Configuration Reference](https://cli.vuejs.org/config/)。
-
----
-
-## 相关链接
-
-- [DJavaWeb/README.md](../README.md)
-- 仓库总览：[../../README.md](../../README.md)
