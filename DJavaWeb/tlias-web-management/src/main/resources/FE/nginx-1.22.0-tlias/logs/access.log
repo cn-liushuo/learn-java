@@ -776,3 +776,5 @@
 127.0.0.1 - - [13/Oct/2026:13:52:43 +0800] "GET /2.jpg HTTP/1.1" 404 555 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
 127.0.0.1 - - [13/Oct/2026:13:52:43 +0800] "GET /3.jpg HTTP/1.1" 404 555 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
 127.0.0.1 - - [13/Oct/2026:13:59:49 +0800] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 555 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+127.0.0.1 - - [13/Oct/2026:16:10:36 +0800] "GET /static/js/chunk-72737d32.6904a3bb.js HTTP/1.1" 200 3871 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+127.0.0.1 - - [13/Oct/2026:16:10:37 +0800] "GET /api/depts HTTP/1.1" 200 537 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
