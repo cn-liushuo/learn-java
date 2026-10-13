@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.pojo.Emp;
 import com.example.pojo.PageBean;
 import com.example.pojo.Result;
 import com.example.service.EmpService;
@@ -40,6 +41,13 @@ public class EmpController {
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("批量删除操作，ids: {}", ids);
         empService.delete(ids);
+        return Result.success();
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Emp emp) {
+        log.info("新增员工, emp: {}", emp);
+        empService.save(emp);
         return Result.success();
     }
 

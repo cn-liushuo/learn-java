@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.pojo.Emp;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -41,7 +42,17 @@ public interface EmpMapper {
 
     /**
      * 批量删除
+     *
      * @param ids
      */
     void delete(@Param("ids") List<Integer> ids);
+
+    /**
+     * 新增员工
+     *
+     * @param emp
+     */
+    @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+            "values(#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, #{createTime}, #{updateTime})")
+    void insert(Emp emp);
 }
