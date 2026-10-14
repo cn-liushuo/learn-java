@@ -6,6 +6,7 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.common.auth.CredentialsProviderFactory;
 import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.common.comm.SignVersion;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,9 +20,12 @@ import java.util.UUID;
 public class AliOSSUtils {
 
     private EnvironmentVariableCredentialsProvider credentialsProvider;
-    private String endpoint = "https://oss-cn-wulanchabu.aliyuncs.com";
-    private String bucketName = "liushuo-web-tlias";
-    private String region = "cn-wulanchabu";
+    @Value("${aliyun.oss.endpoint}") // https://oss-cn-wulanchabu.aliyuncs.com
+    private String endpoint;
+    @Value("${aliyun.oss.bucketName}") // liushuo-web-tlias
+    private String bucketName;
+    @Value("${aliyun.oss.region}") // cn-wulanchabu
+    private String region;
 
 
     /**
