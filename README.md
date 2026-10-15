@@ -2,6 +2,8 @@
 
 Java 学习与实战练习仓库。关键词：Java SE、算法、前端 Web、Vue、Maven、Spring Boot、MyBatis。
 
+文档统一索引见 [docs/README.md](docs/README.md)。本文档和各模块 README 以当前源码为准，课程原始笔记保留在对应工程目录中。
+
 当前已落地四个模块（根目录 `pom.xml` 聚合，Java 侧统一 **JDK 1.8**）：
 
 | 顺序 | 模块 | 类型 | 一句话说明 |
@@ -26,6 +28,7 @@ learn-java/
 ├── BJavaSEBasic/        # Java SE 基础 + 员工系统 / 石头迷宫
 ├── CJavaSEPorjectMax/   # Java SE 进阶（集合 / IO / 线程 / 网络 / 反射等）
 ├── DJavaWeb/            # JavaWeb（前端 → Maven → HTTP → Spring Boot → SQL → MyBatis → Tlias）
+├── docs/                # Markdown 统一索引与维护说明
 └── README.md
 ```
 
@@ -49,7 +52,7 @@ learn-java/
 
 在仓库根目录执行 `mvn compile`，即可编译四个模块。也可进入对应模块目录单独编译，再运行类的 `main`（详见各模块 README）。
 
-前端、Spring Boot、手写 HTTP Server、MySQL、MyBatis、Tlias 等详见 [DJavaWeb/README.md](DJavaWeb/README.md)。
+前端、Spring Boot、手写 HTTP Server、MySQL、MyBatis、Tlias 等详见 [DJavaWeb/README.md](DJavaWeb/README.md)。Tlias 当前接口和 OSS 配置见 [Tlias README](DJavaWeb/tlias-web-management/README.md)。
 
 ---
 

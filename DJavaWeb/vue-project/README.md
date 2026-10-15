@@ -41,3 +41,12 @@ npm run serve
 | `/emp` | 员工管理 |
 
 配置细节可参考 [Vue CLI Configuration Reference](https://cli.vuejs.org/config/)。
+
+---
+
+## 相关链接
+
+- 页面源码：`src/views/tlias/DeptView.vue`、`src/views/tlias/EmpView.vue`（路由见 `src/router/index.js`）
+- 后端接口：[Tlias README](../tlias-web-management/README.md)
+- 课程笔记（Ajax / Vue / Element UI）：[day03_Vue_Element.md](day03_Vue_Element.md)
+- 全仓库文档索引：[docs/README.md](../../docs/README.md)

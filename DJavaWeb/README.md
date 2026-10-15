@@ -21,10 +21,11 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 |---------------|----------|
 | `vue-project` | Vue `2.6`、Vue Router `3`、Element UI `2`、Axios |
 | `springboot-web-quickstart` | Spring Boot `2.6.13`（`spring-boot-starter-web`） |
+| `springboot-web-quickstart2` | Spring Boot `2.7.6`（`spring-boot-starter-web`） |
 | `springboot-web-req-resp` | Spring Boot `2.7.6`、dom4j `2.1.3`（XML 解析） |
 | `springboot-mybatis-quickstart` | Spring Boot `2.6.13`、MyBatis `2.2.2`、Druid `1.2.28`、MySQL 驱动 |
 | `springboot-mybatis-crud` | Spring Boot `2.6.13`、MyBatis `2.2.2`、MySQL 驱动 |
-| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、MySQL 驱动 |
+| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、阿里云 OSS SDK `3.18.4`、Lombok、MySQL 驱动 |
 
 ---
 
@@ -45,7 +46,7 @@ DJavaWeb/
 ├── springboot-web-req-resp/    # 请求参数 / 统一响应 / 员工三层 + SQL 练习
 ├── springboot-mybatis-quickstart/ # MyBatis 注解查询入门
 ├── springboot-mybatis-crud/    # MyBatis 员工表增删改查
-├── tlias-web-management/       # Tlias：部门 CRUD + 员工分页
+├── tlias-web-management/       # Tlias：部门 CRUD + 员工分页与增删改 + OSS 图片上传
 └── pom.xml                     # 聚合父工程
 ```
 
@@ -66,7 +67,7 @@ DJavaWeb/
 | `springboot-web-req-resp` | 请求参数绑定；`Result` 统一响应；员工列表三层架构；[MySQL 练习](springboot-web-req-resp/src/main/resources/static/SQL/README.md) |
 | `springboot-mybatis-quickstart` | MyBatis 注解查询 `user`；无 Web 依赖；库名 `mybatis` |
 | `springboot-mybatis-crud` | 员工表注解 / XML 增删改查；脚本 `SQL/emp.sql`；库名 `mybatis` |
-| `tlias-web-management` | 部门 CRUD（`/depts`）+ 员工分页（`GET /emps`）；PageHelper；脚本 `SQL/tlias.sql`；库名 `tlias`；前端静态资源在 `src/main/resources/FE/` |
+| [`tlias-web-management`](tlias-web-management/README.md) | 部门 CRUD（`/depts`）+ 员工分页、增改删（`/emps`）+ OSS 图片上传（`/upload`）；PageHelper；脚本 `SQL/tlias.sql`；库名 `tlias`；前端静态资源在 `src/main/resources/FE/` |
 
 ---
 
@@ -154,9 +155,10 @@ mvn spring-boot:run
 **Tlias 智能学习辅助系统**
 
 1. 执行 [tlias.sql](tlias-web-management/src/main/resources/SQL/tlias.sql)，创建库 `tlias` 及部门 / 员工表
-2. 在 `tlias-web-management` 目录执行：`mvn spring-boot:run`（默认端口 `8080`）
-3. 接口入口：`/depts`（部门增删改查）、`GET /emps`（员工分页）。字段与示例见 [API 接口文档](tlias-web-management/src/main/resources/API/api接口文档.md)
-4. 配套前端静态资源在 `src/main/resources/FE/`
+2. 按 [Tlias README](tlias-web-management/README.md) 配置数据库与 OSS 环境变量
+3. 在 `tlias-web-management` 目录执行：`mvn spring-boot:run`（默认端口 `8080`）
+4. 接口入口：`/depts`、`/emps`、`/upload`。字段与示例见 [API 接口文档](tlias-web-management/src/main/resources/API/api接口文档.md)
+5. 配套前端为构建产物，入口在 `src/main/resources/FE/nginx-1.22.0-tlias/html/`
 
 `springboot-web-quickstart`、`springboot-web-quickstart2`、`springboot-web-req-resp`、`tlias-web-management` 与手写 HTTP Server 都默认占用 `8080`，不要同时启动。
 
@@ -177,7 +179,7 @@ mvn spring-boot:run
 | `springboot-web-req-resp/` | 参数绑定、统一响应、员工列表；`static/SQL` 为 MySQL 练习 |
 | `springboot-mybatis-quickstart/` | 先执行 `mybatis.sql`，再运行启动类；注解查询 `user` |
 | `springboot-mybatis-crud/` | 在库 `mybatis` 中执行 `emp.sql`，再运行启动类；员工表增删改查 |
-| `tlias-web-management/` | 先执行 `tlias.sql`，再 `mvn spring-boot:run`；部门与员工接口见 API 文档 |
+| `tlias-web-management/` | 先执行 `tlias.sql`，按 [Tlias README](tlias-web-management/README.md) 配置数据库与 OSS，再 `mvn spring-boot:run`；`/depts`、`/emps`、`/upload` 见 API 文档 |
 
 建议学习顺序：前端静态页 → Vue → Maven → HTTP Server → Spring Boot 快速入门 → 请求/响应与三层架构 → MySQL SQL 练习 → MyBatis 入门 → MyBatis CRUD → Tlias。
 
@@ -187,4 +189,6 @@ mvn spring-boot:run
 
 - Vue 子项目：[vue-project/README.md](vue-project/README.md)
 - MySQL 练习：[static/SQL/README.md](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
+- Tlias 项目：[tlias-web-management/README.md](tlias-web-management/README.md)
 - Tlias 接口：[api接口文档.md](tlias-web-management/src/main/resources/API/api接口文档.md)
+- 全部 Markdown 索引：[docs/README.md](../docs/README.md)

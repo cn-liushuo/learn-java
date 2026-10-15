@@ -6,7 +6,7 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.common.auth.CredentialsProviderFactory;
 import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.common.comm.SignVersion;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,18 +20,25 @@ import java.util.UUID;
 public class AliOSSUtils {
 
     private EnvironmentVariableCredentialsProvider credentialsProvider;
-    @Value("${aliyun.oss.endpoint}") // https://oss-cn-wulanchabu.aliyuncs.com
-    private String endpoint;
-    @Value("${aliyun.oss.bucketName}") // liushuo-web-tlias
-    private String bucketName;
-    @Value("${aliyun.oss.region}") // cn-wulanchabu
-    private String region;
+    // @Value("${aliyun.oss.endpoint}") // https://oss-cn-wulanchabu.aliyuncs.com
+    // private String endpoint;
+    // @Value("${aliyun.oss.bucketName}") // liushuo-web-tlias
+    // private String bucketName;
+    // @Value("${aliyun.oss.region}") // cn-wulanchabu
+    // private String region;
+
+    @Autowired
+    private AliOSSProperties aliOSSProperties;
 
 
     /**
      * 实现上传图片到OSS
      */
     public String upload(MultipartFile file) throws Exception {
+        // 获取阿里云 OSS 参数
+        String endpoint = aliOSSProperties.getEndpoint();
+        String bucketName = aliOSSProperties.getBucketName();
+        String region = aliOSSProperties.getRegion();
 
         // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
         credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();

@@ -25,6 +25,7 @@
 | `dept & emp.sql` | 部门与员工相关练习脚本 |
 | `student & course.sql` | 学生与课程多表练习脚本 |
 | `user & card.sql` | 用户与证件等一对一 / 关联练习脚本 |
+| `mybatis.sql` | MyBatis 入门配套脚本：建库 `mybatis` 与 `user` 表（与 `springboot-mybatis-quickstart` 使用同一份脚本） |
 | `数据库-MySQL-01.md` | 课程笔记：MySQL 入门与库表基础 |
 | `数据库-MySQL-02.md` | 课程笔记：查询等进阶内容 |
 | `数据库-MySQL-04.md` | 课程笔记：多表与综合内容 |
