@@ -35,6 +35,14 @@ public class EmpController {
         // 调用 service 分页查询
         PageBean pageBean = empService.page(page, pageSize, name, gender, begin, end);
         return Result.success(pageBean);
+        /* if(登录了) {
+            log.info("分页查询，参数: {}, {}, {}, {}, {}, {}", page, pageSize, name, gender, begin, end);
+            // 调用 service 分页查询
+            PageBean pageBean = empService.page(page, pageSize, name, gender, begin, end);
+            return Result.success(pageBean);
+        } else {
+            // 返回错误信息
+        } */
     }
 
     @DeleteMapping("/{ids}")
