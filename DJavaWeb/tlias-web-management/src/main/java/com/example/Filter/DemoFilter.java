@@ -1,10 +1,9 @@
 package com.example.Filter;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*") // 拦截所有路径请求
+// @WebFilter(urlPatterns = "/*") // 拦截所有路径请求
 // @WebFilter(urlPatterns = "/login") // 拦截登录请求
 // @WebFilter(urlPatterns = "/depts/*") // 拦截/depts路径下所有的请求
 public class DemoFilter implements Filter {

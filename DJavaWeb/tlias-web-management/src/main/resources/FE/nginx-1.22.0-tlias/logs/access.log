@@ -817,3 +817,5 @@
 127.0.0.1 - - [19/Oct/2026:08:50:01 +0800] "GET /api/emps?name=&gender=&begin=&end=&page=1&pageSize=5 HTTP/1.1" 200 1399 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
 127.0.0.1 - - [19/Oct/2026:08:50:01 +0800] "GET /1.jpg HTTP/1.1" 404 555 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
 127.0.0.1 - - [19/Oct/2026:08:50:01 +0800] "GET /2.jpg HTTP/1.1" 404 555 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+127.0.0.1 - - [19/Oct/2026:10:39:13 +0800] "GET /static/js/chunk-72737d32.6904a3bb.js HTTP/1.1" 200 3871 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+127.0.0.1 - - [19/Oct/2026:10:39:16 +0800] "GET /api/depts HTTP/1.1" 200 537 "http://localhost:90/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
