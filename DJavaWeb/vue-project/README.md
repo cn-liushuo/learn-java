@@ -37,6 +37,7 @@ npm run serve
 
 | 路径 | 说明 |
 |------|------|
+| `/` | 重定向到 `/dept` |
 | `/dept` | 部门管理（默认入口） |
 | `/emp` | 员工管理 |
 
@@ -46,6 +47,7 @@ npm run serve
 
 ## 相关链接
 
+- 上级模块：[DJavaWeb/README.md](../README.md)
 - 页面源码：`src/views/tlias/DeptView.vue`、`src/views/tlias/EmpView.vue`（路由见 `src/router/index.js`）
 - 后端接口：[Tlias README](../tlias-web-management/README.md)
 - 课程笔记（Ajax / Vue / Element UI）：[day03_Vue_Element.md](day03_Vue_Element.md)

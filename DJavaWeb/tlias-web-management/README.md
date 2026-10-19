@@ -1,8 +1,8 @@
 # tlias-web-management
 
-Tlias 智能学习辅助系统后端，当前实现包含部门管理、员工分页与条件查询、员工新增/修改/批量删除，以及图片上传到阿里云 OSS。
+Tlias 智能学习辅助系统后端，当前实现包含部门管理、员工分页与条件查询、员工新增/修改/批量删除、员工登录（JWT）、Cookie / Session 演示、图片上传到阿里云 OSS，以及 Filter 过滤器入门示例。
 
-上级模块说明见 [DJavaWeb/README.md](../README.md)，完整接口见 [API 接口文档](src/main/resources/API/api接口文档.md)。
+上级模块说明见 [DJavaWeb/README.md](../README.md)，完整业务接口见 [API 接口文档](src/main/resources/API/api接口文档.md)。Filter 笔记见 [Filter/README.md](src/main/java/com/example/Filter/README.md)。
 
 ## 技术栈
 
@@ -13,6 +13,7 @@ Tlias 智能学习辅助系统后端，当前实现包含部门管理、员工�
 - MySQL Connector/J
 - 阿里云 OSS SDK `3.18.4`
 - Lombok
+- JWT（`JwtUtils`，登录成功后下发令牌）
 
 ## 环境准备
 
@@ -32,9 +33,11 @@ cd DJavaWeb/tlias-web-management
 mvn spring-boot:run
 ```
 
-后端默认使用 `8080` 端口，启动类为 `com.example.TliasWebManagementApplication`。仓库中还保留了构建后的前端资源，入口位于 `src/main/resources/FE/nginx-1.22.0-tlias/html/`；前端通过 Nginx 将 `/api` 请求代理到后端。
+后端默认使用 `8080` 端口，启动类为 `com.example.TliasWebManagementApplication`（含 `@ServletComponentScan`，用于扫描 `@WebFilter`）。仓库中还保留了构建后的前端资源，入口位于 `src/main/resources/FE/nginx-1.22.0-tlias/html/`；前端通过 Nginx 将 `/api` 请求代理到后端。
 
 ## 当前接口
+
+以下路径以当前 Controller 源码为准。
 
 | 资源 | 方法 | 路径 | 用途 |
 |------|------|------|------|
@@ -48,28 +51,35 @@ mvn spring-boot:run
 | 员工 | GET | `/emps/{id}` | 查询单个员工 |
 | 员工 | PUT | `/emps` | 修改员工 |
 | 员工 | DELETE | `/emps/{ids}` | 按逗号分隔 ID 批量删除 |
+| 登录 | POST | `/login` | 员工登录，成功返回 JWT 字符串 |
+| 演示 | GET | `/c1`、`/c2` | Cookie 写入 / 读取演示 |
+| 演示 | GET | `/s1`、`/s2` | HttpSession 写入 / 读取演示 |
 | 文件 | POST | `/upload` | 以 `multipart/form-data` 的 `image` 字段上传图片 |
 
 员工列表支持 `page`、`pageSize`、`name`、`gender`、`begin`、`end` 查询参数，其中日期格式为 `yyyy-MM-dd`。所有接口返回统一的 `Result` 结构：`code` 为 `1` 表示成功，`0` 表示失败。
+
+> 说明：若 [API 接口文档](src/main/resources/API/api接口文档.md) 与上表冲突，以本 README 与 Controller 源码为准（例如文档中仍写「未实现登录」时，以 `LoginController` 的 `POST /login` 为准）。
 
 ## 代码结构
 
 ```text
 src/main/java/com/example/
-├── controller/   # HTTP 接口
+├── controller/   # HTTP 接口（部门 / 员工 / 登录 / Session / 上传）
 ├── service/      # 业务逻辑与分页
 ├── mapper/       # MyBatis Mapper
 ├── pojo/         # Dept、Emp、PageBean、Result
-└── utils/        # OSS 配置与上传工具
+├── utils/        # OSS、JWT 等工具
+└── Filter/       # Servlet Filter 入门（AbcFilter、DemoFilter）
 ```
 
-MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数据库脚本位于 `src/main/resources/SQL/tlias.sql`。
+MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数据库脚本位于 `src/main/resources/SQL/tlias.sql`。Filter 说明见 [Filter/README.md](src/main/java/com/example/Filter/README.md)。
 
 ---
 
 ## 相关链接
 
 - 上级模块：[DJavaWeb/README.md](../README.md)
+- Filter 笔记：[Filter/README.md](src/main/java/com/example/Filter/README.md)
 - 接口文档：[api接口文档.md](src/main/resources/API/api接口文档.md)
 - 前端工程：[vue-project/README.md](../vue-project/README.md)
 - 全仓库文档索引：[docs/README.md](../../docs/README.md)

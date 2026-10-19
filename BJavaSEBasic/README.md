@@ -63,5 +63,6 @@ mvn compile
 
 ## 相关链接
 
+- 仓库总览：[README.md](../README.md)
 - 进阶模块：[CJavaSEPorjectMax](../CJavaSEPorjectMax/README.md)
 - 全仓库文档索引：[docs/README.md](../docs/README.md)

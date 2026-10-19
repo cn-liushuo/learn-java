@@ -89,3 +89,10 @@
 1. 先运行服务端：`org.example.e_net.j_chat_server.com.example.Server`
 2. 再运行客户端：`org.example.e_net.i_chat.com.example.App`
 3. 输入昵称进入；可再启多个客户端验证在线列表与群聊
+
+---
+
+## 相关链接
+
+- 上级模块：[CJavaSEPorjectMax/README.md](../../../../../../../README.md)
+- 全仓库文档索引：[docs/README.md](../../../../../../../../docs/README.md)

@@ -86,3 +86,11 @@ mysql -u root -p
 |------|------|
 | 当前 | 纯 SQL：DDL + DML + DQL + 多表，为后续 JDBC、MyBatis 做准备 |
 | 后续（课程） | 在 Spring Boot 中接入数据源与持久层，替换当前 `emp.xml` 等内存/文件方案 |
+
+---
+
+## 相关链接
+
+- 上级模块：[DJavaWeb/README.md](../../../../../../README.md)
+- MyBatis 入门脚本副本：同目录 `mybatis.sql`（与 `springboot-mybatis-quickstart` 共用）
+- 全仓库文档索引：[docs/README.md](../../../../../../../docs/README.md)

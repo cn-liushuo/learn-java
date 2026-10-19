@@ -40,6 +40,7 @@ mvn compile
 
 ## 相关链接
 
+- 仓库总览：[README.md](../README.md)
 - 前置模块：[BJavaSEBasic](../BJavaSEBasic/README.md) → [CJavaSEPorjectMax](../CJavaSEPorjectMax/README.md)（建议学完后再刷题）
 - 下一模块：[DJavaWeb](../DJavaWeb/README.md)
 - 全仓库文档索引：[docs/README.md](../docs/README.md)

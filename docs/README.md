@@ -1,6 +1,6 @@
 # learn-java 文档索引
 
-本文档索引按当前仓库结构整理，维护基线为 **2026-10-15**。代码目录中的 README 负责说明模块如何运行；课程笔记保留在对应工程附近，便于边看源码边对照。
+本文档索引按当前仓库结构整理，维护基线为 **2026-10-19**。代码目录中的 README 负责说明模块如何运行；课程笔记保留在对应工程附近，便于边看源码边对照。
 
 ## 从这里开始
 
@@ -17,8 +17,9 @@
 | 文档 | 内容 |
 |------|------|
 | [Vue 前端](../DJavaWeb/vue-project/README.md) | Vue 2、Element UI、部门与员工页面 |
-| [Tlias 后端](../DJavaWeb/tlias-web-management/README.md) | 当前后端实现、数据库、OSS 配置和启动方式 |
-| [Tlias API](../DJavaWeb/tlias-web-management/src/main/resources/API/api接口文档.md) | 与当前 Controller 对齐的部门、员工、上传接口 |
+| [Tlias 后端](../DJavaWeb/tlias-web-management/README.md) | 当前后端实现、数据库、OSS 配置、登录 / Session 演示和启动方式 |
+| [Tlias Filter](../DJavaWeb/tlias-web-management/src/main/java/com/example/Filter/README.md) | Servlet Filter 入门：执行流程、拦截路径、过滤器链与运行观察 |
+| [Tlias API](../DJavaWeb/tlias-web-management/src/main/resources/API/api接口文档.md) | 部门、员工、上传等接口说明；与源码冲突时以 Controller / Tlias README 为准 |
 | [MySQL 练习](../DJavaWeb/springboot-web-req-resp/src/main/resources/static/SQL/README.md) | SQL 文件说明与执行顺序 |
 | [局域网即时通讯](../CJavaSEPorjectMax/src/main/java/org/example/e_net/i_chat/README.md) | Swing + TCP Socket 聊天室设计与运行 |
 
