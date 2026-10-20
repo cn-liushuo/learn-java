@@ -21,6 +21,7 @@
         <module>springboot-mybatis-quickstart</module>
         <module>springboot-mybatis-crud</module>
         <module>tlias-web-management</module>
+        <module>springboot-aop-quickstart</module>
     </modules>
 
     <properties>
