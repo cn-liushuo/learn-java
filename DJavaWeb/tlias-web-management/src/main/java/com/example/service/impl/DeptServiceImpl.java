@@ -25,12 +25,15 @@ public class DeptServiceImpl implements DeptService {
         return deptMapper.list();
     }
 
-    @Transactional // spring事务管理
+    @Transactional(rollbackFor = Exception.class) // spring事务管理
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws Exception {
         deptMapper.deleteById(id); // 根据id删除部门
 
-        int i = 1/0;
+        // int i = 1/0;
+        if (true) {
+            throw new Exception("出错啦...");
+        }
 
         empMapper.deleteByDeptId(id); // 根据部门id删除该部门下的员工
     }
