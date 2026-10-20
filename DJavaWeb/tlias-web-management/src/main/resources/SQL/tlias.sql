@@ -53,5 +53,11 @@ VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(),
        (16, 'songyuanqiao', '123456', '宋远桥', 1, '16.jpg', 2, '2007-01-01', 2, now(), now()),
        (17, 'chenyouliang', '123456', '陈友谅', 1, '17.jpg', NULL, '2015-03-21', NULL, now(), now());
 
+create table dept_log(
+                         id int auto_increment comment '主键ID' primary key,
+                         create_time datetime null comment '操作时间',
+                         description varchar(300) null comment '操作描述'
+)comment '部门操作日志表';
+
 
 
