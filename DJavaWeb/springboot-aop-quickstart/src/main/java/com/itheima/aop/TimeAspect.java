@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@Aspect // AOP 类
+// @Aspect // AOP 类
 public class TimeAspect {
 
     // @Around("execution(* com.itheima.service.*.*(..))") // 切入点表达式
