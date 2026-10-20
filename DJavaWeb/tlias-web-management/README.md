@@ -1,8 +1,8 @@
 # tlias-web-management
 
-Tlias 智能学习辅助系统后端，当前实现包含部门管理、员工分页与条件查询、员工新增/修改/批量删除、员工登录（JWT）、Cookie / Session 演示、图片上传到阿里云 OSS，以及 Filter 过滤器入门示例。
+Tlias 智能学习辅助系统后端，当前实现包含部门管理、员工分页与条件查询、员工新增/修改/批量删除、员工登录（JWT）、Cookie / Session 演示、图片上传到阿里云 OSS、Filter 过滤器入门，以及 Spring 声明式事务（解散部门 + 操作日志）示例。
 
-上级模块说明见 [DJavaWeb/README.md](../README.md)，完整业务接口见 [API 接口文档](src/main/resources/API/api接口文档.md)。Filter 笔记见 [Filter/README.md](src/main/java/com/example/Filter/README.md)。
+上级模块说明见 [DJavaWeb/README.md](../README.md)，完整业务接口见 [API 接口文档](src/main/resources/API/api接口文档.md)。Filter 笔记见 [Filter/README.md](src/main/java/com/example/Filter/README.md)。事务笔记见 [service/README.md](src/main/java/com/example/service/README.md)。
 
 ## 技术栈
 
@@ -65,14 +65,14 @@ mvn spring-boot:run
 ```text
 src/main/java/com/example/
 ├── controller/   # HTTP 接口（部门 / 员工 / 登录 / Session / 上传）
-├── service/      # 业务逻辑与分页
-├── mapper/       # MyBatis Mapper
-├── pojo/         # Dept、Emp、PageBean、Result
+├── service/      # 业务逻辑、分页与事务示例（解散部门）
+├── mapper/       # MyBatis Mapper（含 DeptLogMapper）
+├── pojo/         # Dept、DeptLog、Emp、PageBean、Result
 ├── utils/        # OSS、JWT 等工具
 └── Filter/       # Servlet Filter 入门（AbcFilter、DemoFilter）
 ```
 
-MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数据库脚本位于 `src/main/resources/SQL/tlias.sql`。Filter 说明见 [Filter/README.md](src/main/java/com/example/Filter/README.md)。
+MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数据库脚本位于 `src/main/resources/SQL/tlias.sql`（含 `dept_log`）。Filter 说明见 [Filter/README.md](src/main/java/com/example/Filter/README.md)。事务说明见 [service/README.md](src/main/java/com/example/service/README.md)。
 
 ---
 
@@ -80,6 +80,7 @@ MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数�
 
 - 上级模块：[DJavaWeb/README.md](../README.md)
 - Filter 笔记：[Filter/README.md](src/main/java/com/example/Filter/README.md)
+- 事务笔记：[service/README.md](src/main/java/com/example/service/README.md)
 - 接口文档：[api接口文档.md](src/main/resources/API/api接口文档.md)
 - 前端工程：[vue-project/README.md](../vue-project/README.md)
 - 全仓库文档索引：[docs/README.md](../../docs/README.md)
