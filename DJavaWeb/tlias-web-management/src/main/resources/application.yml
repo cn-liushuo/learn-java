@@ -27,3 +27,8 @@ aliyun:
     endpoint: https://oss-cn-wulanchabu.aliyuncs.com
     bucketName: liushuo-web-tlias
     region: cn-wulanchabu
+
+# spring事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
