@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 // 切面类
 @Slf4j
-@Aspect
+// @Aspect
 @Component
 public class MyAspect7 {
 
@@ -19,7 +19,7 @@ public class MyAspect7 {
 
     @Before("pt()")
     private void before() {
-        log.info("MyAspect6 ... before ...");
+        log.info("MyAspect7 ... before ...");
     }
 
 }
