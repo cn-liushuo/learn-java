@@ -1,19 +1,25 @@
 server:
   port: 8080
-  address: 127.0.0.1
+  # address: 127.0.0.1
 
 spring:
   # 数据库的连接信息
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/tlias
+    url: jdbc:mysql://mysql8:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: root123456
   # 文件上传的配置
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+  application:
+    name: ls-tlias
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-standalone:8848
 
 # Mybatis 配置
 mybatis:
