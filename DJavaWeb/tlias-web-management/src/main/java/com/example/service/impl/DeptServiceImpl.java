@@ -37,7 +37,7 @@ public class DeptServiceImpl implements DeptService {
         try {
             deptMapper.deleteById(id); // 根据id删除部门
 
-            int i = 1/0;
+            // int i = 1/0;
             // if (true) {
             //     throw new Exception("出错啦...");
             // }

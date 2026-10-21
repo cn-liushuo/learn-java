@@ -4,13 +4,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import java.util.Date;
 import java.util.Map;
 
 public class JwtUtils {
 
     private static String signKey = "example";
-    private static Long expire = 43200000L;
+    // 不设置过期时间：token 永久有效（仅建议本地学习环境使用，生产环境请保留有效期）
 
     /**
      * 生成 JWT 令牌
@@ -22,7 +21,7 @@ public class JwtUtils {
         String jwt = Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, signKey) // 设置签名算法
                 .setClaims(claims) // 自定义内容(载荷)
-                .setExpiration(new Date(System.currentTimeMillis() + expire)) // 设置有效期为1h
+                // 不调用 setExpiration，JWT 就没有 exp 声明，解析时不会过期
                 .compact();
         return jwt;
     }

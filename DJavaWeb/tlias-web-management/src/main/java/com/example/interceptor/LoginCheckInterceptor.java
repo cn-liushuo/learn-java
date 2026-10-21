@@ -51,6 +51,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         // 5.解析token，如果解析失败，返回错误结果(未登录)。
         try {
+            log.info("令牌, {}", jwt);
             JwtUtils.parseJwt(jwt);
         } catch (Exception e) { // jwt 解析失败
             e.printStackTrace();
