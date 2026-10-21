@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 // 切面类
 @Slf4j
-@Aspect
+// @Aspect
 @Component
 public class MyAspect6 {
 
