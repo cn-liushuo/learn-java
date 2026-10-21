@@ -107,7 +107,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.TliasWebManagementApplication</mainClass>
-                    <skip>true</skip>
+                    <!-- <skip>true</skip> -->
                 </configuration>
                 <executions>
                     <execution>
