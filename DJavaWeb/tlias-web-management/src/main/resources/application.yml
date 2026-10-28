@@ -8,6 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://mysql8:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     url: jdbc:mysql://127.0.0.1:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://172.16.2.10:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: root123456
   # 文件上传的配置
@@ -22,6 +23,7 @@ spring:
       discovery:
 #        server-addr: nacos-standalone:8848
         server-addr: 127.0.0.1:8848
+#        server-addr: 172.16.2.10:8848
 
 # Mybatis 配置
 mybatis:
