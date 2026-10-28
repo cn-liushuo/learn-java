@@ -43,11 +43,13 @@ class SpringbootWebConfig2ApplicationTests {
         }
     }
 
+    @Autowired
+    private SAXReader saxReader;
 
     //第三方bean的管理
     @Test
     public void testThirdBean() throws Exception {
-        SAXReader saxReader = new SAXReader();
+        // SAXReader saxReader = new SAXReader();
 
         Document document = saxReader.read(this.getClass().getClassLoader().getResource("1.xml"));
         Element rootElement = document.getRootElement();
@@ -55,6 +57,12 @@ class SpringbootWebConfig2ApplicationTests {
         String age = rootElement.element("age").getText();
 
         System.out.println(name + " : " + age);
+    }
+
+    @Test
+    public void testGetBean2() {
+        Object saxReader = applicationContext.getBean("reader");
+        System.out.println(saxReader);
     }
 
 }

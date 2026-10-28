@@ -1,7 +1,9 @@
 package com.itheima;
 
+import org.dom4j.io.SAXReader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
@@ -10,5 +12,11 @@ public class SpringbootWebConfig2Application {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootWebConfig2Application.class, args);
     }
+
+    // 声明第三方bean —— 不建议放在这里，建议和配置文件放在一起
+    // @Bean // 将当前方法的返回值对象交给IOC容器管理，成为IOC容器bean
+    // public SAXReader saxReader() {
+    //     return new SAXReader();
+    // }
 
 }
