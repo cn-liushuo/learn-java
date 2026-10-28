@@ -24,6 +24,7 @@
         <module>springboot-aop-quickstart</module>
         <module>springboot-web-config</module>
         <module>springboot-web-config2</module>
+        <module>itheima-utils</module>
     </modules>
 
     <properties>

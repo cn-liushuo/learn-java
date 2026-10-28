@@ -11,9 +11,9 @@ Java 学习与实战练习仓库。关键词：Java SE、算法、前端 Web、V
 | 1 | [**BJavaSEBasic**](BJavaSEBasic/README.md) | Maven | Java SE 语法、面向对象、Swing 小项目 |
 | 2 | [**CJavaSEPorjectMax**](CJavaSEPorjectMax/README.md) | Maven | 集合 / IO / 多线程 / 网络 / 反射与代理 |
 | 3 | [**ALeetCode**](ALeetCode/README.md) | Maven | LeetCode 算法题解 |
-| 4 | [**DJavaWeb**](DJavaWeb/README.md) | Maven 聚合 + 前端静态页 + Vue CLI | HTML / CSS / JS / Ajax / Vue；Maven；HTTP 与 Spring Boot Web；MySQL 基础练习；MyBatis；Tlias（含 Filter / 登录等） |
+| 4 | [**DJavaWeb**](DJavaWeb/README.md) | Maven 聚合 + 前端静态页 + Vue CLI | HTML / CSS / JS / Ajax / Vue；Maven；HTTP 与 Spring Boot Web；MySQL 基础练习；MyBatis；Tlias（登录 / Filter / 拦截器 / 事务 / AOP）；配置优先级；Bean 管理与 SpringBoot 原理 |
 
-> 建议按上表顺序学习：先 SE，再进阶与网络，再刷题巩固，最后进入 DJavaWeb。该模块内部顺序为前端与 Spring Boot，再 SQL，再 MyBatis，最后 Tlias。
+> 建议按上表顺序学习：先 SE，再进阶与网络，再刷题巩固，最后进入 DJavaWeb。该模块内部顺序为前端与 Spring Boot，再 SQL，再 MyBatis，再 Tlias，最后 AOP、配置与 SpringBoot 原理。
 
 各模块的包对照、接口明细、运行步骤见对应子目录 README，本页只做总览与导航。
 
@@ -27,7 +27,7 @@ learn-java/
 ├── ALeetCode/           # 算法题解
 ├── BJavaSEBasic/        # Java SE 基础 + 员工系统 / 石头迷宫
 ├── CJavaSEPorjectMax/   # Java SE 进阶（集合 / IO / 线程 / 网络 / 反射等）
-├── DJavaWeb/            # JavaWeb（前端 → Maven → HTTP → Spring Boot → SQL → MyBatis → Tlias）
+├── DJavaWeb/            # JavaWeb（前端 → Maven → HTTP → Spring Boot → SQL → MyBatis → Tlias → AOP → 原理）
 ├── docs/                # Markdown 统一索引与维护说明
 └── README.md
 ```
@@ -42,7 +42,8 @@ learn-java/
 | **Maven 3.6.1+** | 建议 [Apache Maven](https://maven.apache.org/)，配置 `MAVEN_HOME` 与 PATH |
 | **IDE** | IntelliJ IDEA / Eclipse；使用 Lombok 的模块需开启注解处理 |
 | **Node.js LTS** | 仅 [vue-project](DJavaWeb/vue-project/README.md) 需要 |
-| **MySQL 8.x** | SQL 练习、MyBatis 两个工程、Tlias 需要。SQL 练习说明见 [static/SQL](DJavaWeb/springboot-web-req-resp/src/main/resources/static/SQL/README.md) |
+| **MySQL 8.x** | SQL 练习、MyBatis 两个工程、Tlias、AOP 入门需要。SQL 练习说明见 [static/SQL](DJavaWeb/springboot-web-req-resp/src/main/resources/static/SQL/README.md) |
+| **Nacos** | 仅 Tlias 需要（注册中心 `127.0.0.1:8848`） |
 
 主要依赖版本见各模块 README。
 
@@ -52,7 +53,7 @@ learn-java/
 
 在仓库根目录执行 `mvn compile`，即可编译四个模块。也可进入对应模块目录单独编译，再运行类的 `main`（详见各模块 README）。
 
-前端、Spring Boot、手写 HTTP Server、MySQL、MyBatis、Tlias 等详见 [DJavaWeb/README.md](DJavaWeb/README.md)。Tlias 当前接口和 OSS 配置见 [Tlias README](DJavaWeb/tlias-web-management/README.md)；Filter 入门见 [Filter/README.md](DJavaWeb/tlias-web-management/src/main/java/com/example/Filter/README.md)。
+前端、Spring Boot、手写 HTTP Server、MySQL、MyBatis、Tlias、AOP、SpringBoot 原理等详见 [DJavaWeb/README.md](DJavaWeb/README.md)。Tlias 当前接口和 OSS 配置见 [Tlias README](DJavaWeb/tlias-web-management/README.md)；各专题笔记入口见 [docs/README.md](docs/README.md)。
 
 ---
 

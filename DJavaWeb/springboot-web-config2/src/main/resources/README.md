@@ -1,6 +1,11 @@
-# Bean 管理
+# Bean 管理与 SpringBoot 原理
 
-本模块演示 Spring IOC 容器中 Bean 的获取、作用域，以及第三方 Bean 的声明方式。示例代码见 `SpringbootWebConfig2ApplicationTests`。
+本模块演示 Spring IOC 容器中 Bean 的获取、作用域、第三方 Bean 的声明方式，以及 SpringBoot 起步依赖与自动配置原理。
+
+- Bean 管理示例：`SpringbootWebConfig2ApplicationTests`
+- 自动配置示例：`AutoConfigurationTests`，依赖同目录下的 [`itheima-utils`](../../../../itheima-utils) 模块
+
+上级说明见 [DJavaWeb/README.md](../../../../README.md)。
 
 ## 获取 bean
 
@@ -82,3 +87,49 @@ private SAXReader saxReader;
 | --- | --- |
 | 项目中自己定义的类 | `@Component` 及其衍生注解 |
 | 第三方依赖中的类 | `@Configuration` + `@Bean` |
+
+---
+
+## SpringBoot 原理
+
+### 起步依赖
+
+起步依赖（如 `spring-boot-starter-web`）本质是 Maven 依赖传递：引入一个 starter，它所需的 Spring MVC、Tomcat、Jackson 等依赖会被自动引入，版本由 Spring Boot 父工程统一管理。
+
+### 自动配置
+
+自动配置：Spring 容器启动后，一些配置类、Bean 对象自动存入 IOC 容器，无需手动声明，从而简化开发、省去繁琐的配置。
+
+例如 `AutoConfigurationTests.testJson` 中直接注入了 `Gson`。项目没有声明过它：`gson` 由 `aliyun-sdk-oss` 依赖传递引入，Spring Boot 检测到类路径中有 Gson 后自动配置了这个 Bean。
+
+### 加载第三方 jar 中的 Bean
+
+`itheima-utils` 中的 `TokenParser`（`@Component`）和 `HeaderConfig`（`@Configuration`）位于 `com.example` 包。启动类在 `com.itheima` 包，`@SpringBootApplication` 默认只扫描 `com.itheima` 及其子包，所以这些 Bean 不会生效，测试报 `NoSuchBeanDefinitionException`。
+
+解决方案（启动类 `SpringbootWebConfig2Application` 中保留了全部写法）：
+
+| 方案 | 写法 | 说明 |
+|------|------|------|
+| 组件扫描 | `@ComponentScan({"com.itheima", "com.example"})` | 需要知道第三方包名，扫描范围大，不推荐 |
+| 导入普通类 | `@Import(TokenParser.class)` | 直接把类注册为 Bean |
+| 导入配置类 | `@Import(HeaderConfig.class)` | 配置类中的 `@Bean` 全部生效 |
+| 导入 `ImportSelector` | `@Import(MyImportSelector.class)` | `selectImports` 返回要导入的类全名数组 |
+| `@EnableXxx` 注解 | `@EnableHeaderConfig` | 第三方封装好的 `@Import`，使用方最省事，**推荐** |
+
+当前启动类使用的是 `@EnableHeaderConfig` + `@Import(TokenParser.class)`：
+
+- `@EnableHeaderConfig` 内部通过 `MyImportSelector` 导入 `HeaderConfig`，注册 `HeaderParser`、`HeaderGenerator`
+- `HeaderConfig` 没有声明 `TokenParser`，需要单独 `@Import`
+
+### 运行自动配置示例
+
+1. 先安装 `itheima-utils` 到本地仓库：
+
+   ```bash
+   cd DJavaWeb/itheima-utils
+   mvn install
+   ```
+
+2. 在 IDEA 中 Reload Maven 项目，运行 `AutoConfigurationTests`，4 个测试分别从容器中获取 `Gson`、`TokenParser`、`HeaderParser`、`HeaderGenerator`
+
+> `itheima-utils` 已在 `DJavaWeb/pom.xml` 的 `<modules>` 中。在 `DJavaWeb` 目录执行 `mvn install` 时会按依赖顺序一起构建，无需单独安装。

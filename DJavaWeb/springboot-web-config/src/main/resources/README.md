@@ -2,6 +2,10 @@
 
 本模块用于演示 Spring Boot（2.6.13）中各种配置方式的写法及其优先级，演示项为 `server.port`（服务端口）。
 
+上级说明见 [DJavaWeb/README.md](../../../../README.md)。Bean 管理与 SpringBoot 原理见 [springboot-web-config2](../../../../springboot-web-config2/src/main/resources/README.md)。
+
+---
+
 ## 配置文件格式
 
 Spring Boot 支持三种配置文件，位于 `src/main/resources` 下：

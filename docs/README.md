@@ -1,6 +1,6 @@
 # learn-java 文档索引
 
-本文档索引按当前仓库结构整理，维护基线为 **2026-10-19**。代码目录中的 README 负责说明模块如何运行；课程笔记保留在对应工程附近，便于边看源码边对照。
+本文档索引按当前仓库结构整理，维护基线为 **2026-10-28**。代码目录中的 README 负责说明模块如何运行；课程笔记保留在对应工程附近，便于边看源码边对照。
 
 ## 从这里开始
 
@@ -10,16 +10,21 @@
 | [BJavaSEBasic](../BJavaSEBasic/README.md) | Java SE 基础、Swing、员工管理系统、石头迷宫 |
 | [CJavaSEPorjectMax](../CJavaSEPorjectMax/README.md) | 集合、IO、多线程、网络、反射、注解、代理 |
 | [ALeetCode](../ALeetCode/README.md) | LeetCode 题解练习 |
-| [DJavaWeb](../DJavaWeb/README.md) | 前端、Maven、HTTP、Spring Boot、MyBatis、Tlias |
+| [DJavaWeb](../DJavaWeb/README.md) | 前端、Maven、HTTP、Spring Boot、MyBatis、Tlias、AOP、SpringBoot 原理 |
 
 ## DJavaWeb 项目文档
 
 | 文档 | 内容 |
 |------|------|
 | [Vue 前端](../DJavaWeb/vue-project/README.md) | Vue 2、Element UI、部门与员工页面 |
-| [Tlias 后端](../DJavaWeb/tlias-web-management/README.md) | 当前后端实现、数据库、OSS 配置、登录 / Session 演示和启动方式 |
+| [Tlias 后端](../DJavaWeb/tlias-web-management/README.md) | 当前后端实现、数据库、OSS / Nacos 配置、登录校验、全局异常、AOP 操作日志和启动方式 |
 | [Tlias Filter](../DJavaWeb/tlias-web-management/src/main/java/com/example/Filter/README.md) | Servlet Filter 入门：执行流程、拦截路径、过滤器链与运行观察 |
+| [Tlias Interceptor](../DJavaWeb/tlias-web-management/src/main/java/com/example/interceptor/README.md) | Spring MVC 拦截器：JWT 登录校验、执行流程、与 Filter 的区别 |
+| [Tlias Config](../DJavaWeb/tlias-web-management/src/main/java/com/example/config/README.md) | `WebConfig` 注册拦截器与路径规则 |
 | [Tlias Transaction](../DJavaWeb/tlias-web-management/src/main/java/com/example/service/README.md) | Spring 声明式事务：解散部门、`REQUIRES_NEW` 操作日志与回滚观察 |
+| [AOP 入门](../DJavaWeb/springboot-aop-quickstart/src/main/java/com/itheima/aop/README.md) | 通知类型、通知顺序、切入点表达式、连接点 |
+| [配置优先级](../DJavaWeb/springboot-web-config/src/main/resources/README.md) | `properties` / `yml` / `yaml`、Java 系统属性与命令行参数 |
+| [Bean 管理与 SpringBoot 原理](../DJavaWeb/springboot-web-config2/src/main/resources/README.md) | 获取 Bean、作用域、第三方 Bean、起步依赖、自动配置 |
 | [Tlias API](../DJavaWeb/tlias-web-management/src/main/resources/API/api接口文档.md) | 部门、员工、上传等接口说明；与源码冲突时以 Controller / Tlias README 为准 |
 | [MySQL 练习](../DJavaWeb/springboot-web-req-resp/src/main/resources/static/SQL/README.md) | SQL 文件说明与执行顺序 |
 | [局域网即时通讯](../CJavaSEPorjectMax/src/main/java/org/example/e_net/i_chat/README.md) | Swing + TCP Socket 聊天室设计与运行 |
@@ -51,9 +56,7 @@
 
 以下文件由 Spring Initializr 生成，内容只是通用参考，不作为项目运行说明；项目级运行方式以各模块 README 为准。
 
-- [springboot-mybatis-crud/HELP.md](../DJavaWeb/springboot-mybatis-crud/HELP.md)
-- [springboot-mybatis-quickstart/HELP.md](../DJavaWeb/springboot-mybatis-quickstart/HELP.md)
-- [tlias-web-management/HELP.md](../DJavaWeb/tlias-web-management/HELP.md)
+- [springboot-web-config/HELP.md](../DJavaWeb/springboot-web-config/HELP.md)
 
 ## 维护约定
 

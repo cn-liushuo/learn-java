@@ -1,6 +1,6 @@
 # DJavaWeb
 
-JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模块、手写 HTTP Server、Spring Boot Web（快速入门 + 请求/响应 + 员工三层架构）、MySQL DDL / DML / DQL 基础练习、MyBatis 入门与 CRUD，以及 Tlias 智能学习辅助系统。
+JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模块、手写 HTTP Server、Spring Boot Web（快速入门 + 请求/响应 + 员工三层架构）、MySQL DDL / DML / DQL 基础练习、MyBatis 入门与 CRUD、Tlias 智能学习辅助系统，以及 AOP、Spring Boot 配置优先级、Bean 管理与 SpringBoot 原理。
 
 配套课程：[黑马程序员 JavaWeb 开发教程（Spring / MyBatis / SpringMVC / SpringBoot 全流程）](https://www.bilibili.com/video/BV1m84y1w7Tb/?spm_id_from=333.788.video.desc.click)
 
@@ -13,7 +13,8 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 1. **JDK 8**、**Maven 3.6.1+**
 2. IDE：IntelliJ IDEA / Eclipse
 3. **Node.js LTS**：仅 [vue-project](vue-project/README.md) 需要
-4. **MySQL 8.x**：SQL 练习、MyBatis 两个工程、Tlias 需要。SQL 练习说明见 [static/SQL](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
+4. **MySQL 8.x**：SQL 练习、MyBatis 两个工程、Tlias、AOP 入门需要。SQL 练习说明见 [static/SQL](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
+5. **Nacos**：仅 Tlias 需要（注册中心 `127.0.0.1:8848`）
 
 主要依赖：
 
@@ -25,7 +26,11 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 | `springboot-web-req-resp` | Spring Boot `2.7.6`、dom4j `2.1.3`（XML 解析） |
 | `springboot-mybatis-quickstart` | Spring Boot `2.6.13`、MyBatis `2.2.2`、Druid `1.2.28`、MySQL 驱动 |
 | `springboot-mybatis-crud` | Spring Boot `2.6.13`、MyBatis `2.2.2`、MySQL 驱动 |
-| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、阿里云 OSS SDK `3.18.4`、Lombok、MySQL 驱动 |
+| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、阿里云 OSS SDK `3.18.4`、jjwt `0.9.1`、fastjson `1.2.84`、AOP、Nacos Discovery `2021.0.5.0`、Lombok、MySQL 驱动 |
+| `springboot-aop-quickstart` | Spring Boot `2.7.2`、`spring-boot-starter-aop`、MyBatis `2.2.2`、Lombok、MySQL 驱动 |
+| `springboot-web-config` | Spring Boot `2.6.13`（`spring-boot-starter-web`） |
+| `springboot-web-config2` | Spring Boot `2.7.5`、MyBatis `2.2.2`、PageHelper `1.4.2`、OSS `3.15.1`、jjwt、fastjson、dom4j `2.1.3`、`itheima-utils` |
+| `itheima-utils` | `spring-boot-starter` `2.7.5`（模拟第三方工具包） |
 
 ---
 
@@ -46,7 +51,11 @@ DJavaWeb/
 ├── springboot-web-req-resp/    # 请求参数 / 统一响应 / 员工三层 + SQL 练习
 ├── springboot-mybatis-quickstart/ # MyBatis 注解查询入门
 ├── springboot-mybatis-crud/    # MyBatis 员工表增删改查
-├── tlias-web-management/       # Tlias：部门/员工/登录/上传 + Filter 入门 + OSS
+├── tlias-web-management/       # Tlias：部门/员工/登录/上传 + Filter / 拦截器 + 事务 + AOP 日志 + OSS
+├── springboot-aop-quickstart/  # AOP 入门：通知类型 / 顺序 / 切入点表达式 / 连接点
+├── springboot-web-config/      # 配置文件格式与配置优先级
+├── springboot-web-config2/     # Bean 管理 + SpringBoot 原理（自动配置）
+├── itheima-utils/              # 模拟第三方 jar，供 springboot-web-config2 演示自动配置
 └── pom.xml                     # 聚合父工程
 ```
 
@@ -67,7 +76,11 @@ DJavaWeb/
 | `springboot-web-req-resp` | 请求参数绑定；`Result` 统一响应；员工列表三层架构；[MySQL 练习](springboot-web-req-resp/src/main/resources/static/SQL/README.md) |
 | `springboot-mybatis-quickstart` | MyBatis 注解查询 `user`；无 Web 依赖；库名 `mybatis` |
 | `springboot-mybatis-crud` | 员工表注解 / XML 增删改查；脚本 `SQL/emp.sql`；库名 `mybatis` |
-| [`tlias-web-management`](tlias-web-management/README.md) | 部门 CRUD（`/depts`）+ 员工分页、增改删（`/emps`）+ 登录（`/login`）+ OSS 上传（`/upload`）+ [Filter 入门](tlias-web-management/src/main/java/com/example/Filter/README.md)；PageHelper；脚本 `SQL/tlias.sql`；库名 `tlias`；前端静态资源在 `src/main/resources/FE/` |
+| [`tlias-web-management`](tlias-web-management/README.md) | 部门 CRUD（`/depts`）+ 员工分页、增改删（`/emps`）+ 登录（`/login`）+ OSS 上传（`/upload`）+ [Filter](tlias-web-management/src/main/java/com/example/Filter/README.md) / [拦截器](tlias-web-management/src/main/java/com/example/interceptor/README.md) + [事务](tlias-web-management/src/main/java/com/example/service/README.md) + AOP 操作日志；PageHelper；脚本 `SQL/tlias.sql`；库名 `tlias`；前端静态资源在 `src/main/resources/FE/` |
+| [`springboot-aop-quickstart`](springboot-aop-quickstart/src/main/java/com/itheima/aop/README.md) | AOP 入门：五种通知、通知顺序、`execution` / `@annotation` 切入点、连接点；复用库 `tlias` |
+| [`springboot-web-config`](springboot-web-config/src/main/resources/README.md) | `properties` / `yml` / `yaml` 配置格式，Java 系统属性与命令行参数的优先级 |
+| [`springboot-web-config2`](springboot-web-config2/src/main/resources/README.md) | 获取 Bean、Bean 作用域、第三方 Bean（`@Bean`）；起步依赖、自动配置、`@Import` / `@EnableXxx` |
+| `itheima-utils` | 模拟第三方工具包：`TokenParser`、`HeaderConfig`、`MyImportSelector`、`@EnableHeaderConfig` |
 
 ---
 
@@ -158,10 +171,25 @@ mvn spring-boot:run
 2. 按 [Tlias README](tlias-web-management/README.md) 配置数据库与 OSS 环境变量
 3. 在 `tlias-web-management` 目录执行：`mvn spring-boot:run`（默认端口 `8080`）
 4. 接口入口：`/depts`、`/emps`、`/login`、`/upload` 等，详见 [Tlias README](tlias-web-management/README.md) 与 [API 接口文档](tlias-web-management/src/main/resources/API/api接口文档.md)
-5. Filter 入门见 [Filter/README.md](tlias-web-management/src/main/java/com/example/Filter/README.md)
+5. 除 `/login` 外的请求需在请求头 `token` 中携带 JWT；Filter / 拦截器 / 事务笔记见 Tlias README 中的「代码结构」
 6. 配套前端为构建产物，入口在 `src/main/resources/FE/nginx-1.22.0-tlias/html/`
+7. 已接入 Nacos 注册中心（`127.0.0.1:8848`），本地需先启动 Nacos
 
-`springboot-web-quickstart`、`springboot-web-quickstart2`、`springboot-web-req-resp`、`tlias-web-management` 与手写 HTTP Server 都默认占用 `8080`，不要同时启动。
+**AOP 入门**
+
+复用库 `tlias`。修改 `application.yml` 中的数据库账号后，运行 `SpringbootAopQuickstart1ApplicationTests`，各切面的启用方式见 [aop/README.md](springboot-aop-quickstart/src/main/java/com/itheima/aop/README.md)。
+
+**配置优先级**
+
+`springboot-web-config` 演示 `properties` / `yml` / `yaml` 与命令行参数的优先级，详见 [README](springboot-web-config/src/main/resources/README.md)。
+
+**Bean 管理与 SpringBoot 原理**
+
+1. 先在 `itheima-utils` 目录执行 `mvn install`（或在 `DJavaWeb` 目录整体 `mvn install`）
+2. 再运行 `springboot-web-config2` 中的 `SpringbootWebConfig2ApplicationTests`、`AutoConfigurationTests`
+3. 详见 [README](springboot-web-config2/src/main/resources/README.md)
+
+`springboot-web-quickstart`、`springboot-web-quickstart2`、`springboot-web-req-resp`、`tlias-web-management`、`springboot-aop-quickstart`、`springboot-web-config`、`springboot-web-config2` 与手写 HTTP Server 都默认占用 `8080`，不要同时启动。
 
 ---
 
@@ -180,9 +208,12 @@ mvn spring-boot:run
 | `springboot-web-req-resp/` | 参数绑定、统一响应、员工列表；`static/SQL` 为 MySQL 练习 |
 | `springboot-mybatis-quickstart/` | 先执行 `mybatis.sql`，再运行启动类；注解查询 `user` |
 | `springboot-mybatis-crud/` | 在库 `mybatis` 中执行 `emp.sql`，再运行启动类；员工表增删改查 |
-| `tlias-web-management/` | 先执行 `tlias.sql`，按 [Tlias README](tlias-web-management/README.md) 配置数据库与 OSS，再 `mvn spring-boot:run`；`/depts`、`/emps`、`/login`、`/upload` 见 API / README；Filter 见 [Filter/README.md](tlias-web-management/src/main/java/com/example/Filter/README.md) |
+| `tlias-web-management/` | 先执行 `tlias.sql`，按 [Tlias README](tlias-web-management/README.md) 配置数据库、OSS 与 Nacos，再 `mvn spring-boot:run`；`/depts`、`/emps`、`/login`、`/upload` 见 API / README |
+| `springboot-aop-quickstart/` | 打开需要的切面类 `@Aspect`，运行测试类观察通知日志 |
+| `springboot-web-config/` | 切换三种配置文件与启动参数，观察端口变化 |
+| `springboot-web-config2/` | 先 `mvn install` `itheima-utils`，再运行 Bean 管理与自动配置测试 |
 
-建议学习顺序：前端静态页 → Vue → Maven → HTTP Server → Spring Boot 快速入门 → 请求/响应与三层架构 → MySQL SQL 练习 → MyBatis 入门 → MyBatis CRUD → Tlias。
+建议学习顺序：前端静态页 → Vue → Maven → HTTP Server → Spring Boot 快速入门 → 请求/响应与三层架构 → MySQL SQL 练习 → MyBatis 入门 → MyBatis CRUD → Tlias（含 Filter / 拦截器 / 事务）→ AOP 入门 → Tlias AOP 操作日志 → 配置优先级 → Bean 管理 → SpringBoot 原理。
 
 ---
 
@@ -192,5 +223,10 @@ mvn spring-boot:run
 - MySQL 练习：[static/SQL/README.md](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
 - Tlias 项目：[tlias-web-management/README.md](tlias-web-management/README.md)
 - Tlias Filter：[Filter/README.md](tlias-web-management/src/main/java/com/example/Filter/README.md)
+- Tlias 拦截器：[interceptor/README.md](tlias-web-management/src/main/java/com/example/interceptor/README.md)
+- Tlias 事务：[service/README.md](tlias-web-management/src/main/java/com/example/service/README.md)
 - Tlias 接口：[api接口文档.md](tlias-web-management/src/main/resources/API/api接口文档.md)
+- AOP 入门：[aop/README.md](springboot-aop-quickstart/src/main/java/com/itheima/aop/README.md)
+- 配置优先级：[springboot-web-config](springboot-web-config/src/main/resources/README.md)
+- Bean 管理与 SpringBoot 原理：[springboot-web-config2](springboot-web-config2/src/main/resources/README.md)
 - 全部 Markdown 索引：[docs/README.md](../docs/README.md)
