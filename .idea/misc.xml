@@ -19,6 +19,9 @@
         <option value="$PROJECT_DIR$/DJavaWeb/springboot-web-config/pom.xml" />
         <option value="$PROJECT_DIR$/DJavaWeb/springboot-web-config2/pom.xml" />
         <option value="$PROJECT_DIR$/DJavaWeb/itheima-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/DJavaWeb/aliyun-oss-spring-boot-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/DJavaWeb/aliyun-oss-spring-boot-autoconfigure/pom.xml" />
+        <option value="$PROJECT_DIR$/DJavaWeb/springboot-autoconfiguration-test/pom.xml" />
       </list>
     </option>
   </component>

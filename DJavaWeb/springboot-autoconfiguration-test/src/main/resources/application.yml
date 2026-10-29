@@ -1,0 +1,6 @@
+# 阿里云OSS配置
+aliyun:
+  oss:
+    endpoint: https://oss-cn-wulanchabu.aliyuncs.com
+    bucketName: liushuo-web-tlias
+    region: cn-wulanchabu

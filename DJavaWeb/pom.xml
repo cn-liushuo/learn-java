@@ -25,11 +25,12 @@
         <module>springboot-web-config</module>
         <module>springboot-web-config2</module>
         <module>itheima-utils</module>
+        <module>springboot-autoconfiguration-test</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
