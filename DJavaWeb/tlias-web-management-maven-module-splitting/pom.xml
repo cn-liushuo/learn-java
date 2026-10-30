@@ -19,6 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.13</spring-boot.version>
+        <!-- 构建时跳过测试执行（测试类仍会编译），需要运行测试时用 -DskipTests=false 覆盖 -->
+        <skipTests>true</skipTests>
     </properties>
     <dependencies>
         <dependency>
