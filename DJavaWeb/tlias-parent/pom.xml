@@ -70,4 +70,18 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <!-- release版本的发布地址 -->
+        <repository>
+            <id>maven-releases</id>
+            <url>http://localhost:8091/repository/maven-releases/</url>
+        </repository>
+
+        <!-- snapshot版本的发布地址 -->
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <url>http://localhost:8091/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
