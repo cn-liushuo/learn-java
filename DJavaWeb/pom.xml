@@ -26,6 +26,8 @@
         <module>springboot-web-config2</module>
         <module>itheima-utils</module>
         <module>springboot-autoconfiguration-test</module>
+        <module>aliyun-oss-spring-boot-starter</module>
+        <module>aliyun-oss-spring-boot-autoconfigure</module>
     </modules>
 
     <properties>
