@@ -4,7 +4,7 @@ Tlias 工程中的 Spring 声明式事务（Declarative Transaction）入门示�
 
 - [`DeptServiceImpl`](impl/DeptServiceImpl.java)：解散部门时开启事务
 - [`DeptLogServiceImpl`](impl/DeptLogServiceImpl.java)：操作日志使用独立事务
-- [`DeptLog`](../pojo/DeptLog.java) / [`DeptLogMapper`](../mapper/DeptLogMapper.java)：部门操作日志实体与持久化
+- [`DeptLog`](../../../../../../../tlias-pojo/src/main/java/com/example/pojo/DeptLog.java)（位于 `tlias-pojo` 模块）/ [`DeptLogMapper`](../mapper/DeptLogMapper.java)：部门操作日志实体与持久化
 
 上级说明见 [tlias-web-management-maven-module-splitting/README.md](../../../../../../README.md)。事务调试日志见 [`application.yml`](../../../../resources/application.yml) 中的 `JdbcTransactionManager` 配置。
 
@@ -47,7 +47,7 @@ service/
 ├── impl/
 │   ├── DeptServiceImpl.java  # @Transactional：删除部门 + 员工
 │   └── DeptLogServiceImpl.java  # REQUIRES_NEW：插入日志
-pojo/DeptLog.java             # 日志实体
+tlias-pojo → pojo/DeptLog.java   # 日志实体（独立模块）
 mapper/DeptLogMapper.java     # insert into dept_log ...
 ```
 
@@ -125,8 +125,8 @@ logging:
 ## 运行观察
 
 1. 确认已执行 [`tlias.sql`](../../../../resources/SQL/tlias.sql)（含 `dept_log` 表）。
-2. 启动 Tlias：在 `tlias-web-management-maven-module-splitting` 目录执行 `mvn spring-boot:run`（默认端口 `8081`）。
-3. 调用删除部门，例如：`DELETE http://localhost:8081/depts/1`（按实际存在的部门 id 调整）。
+2. 启动 Tlias：在 `tlias-web-management-maven-module-splitting` 目录执行 `mvn spring-boot:run`（端口 `8082`）。
+3. 调用删除部门，例如：`DELETE http://localhost:8082/depts/1`（按实际存在的部门 id 调整）。
 4. 预期（在保留 `1/0` 学习代码时）：
    - 接口失败（运行时异常导致事务回滚）；
    - `dept` / `emp` 中对应数据**未删除**；

@@ -35,9 +35,7 @@
         <module>springboot-autoconfiguration-test</module>
         <module>aliyun-oss-spring-boot-starter</module>
         <module>aliyun-oss-spring-boot-autoconfigure</module>
-        <module>tlias-web-management-maven-module-splitting</module>
-        <module>tlias-pojo</module>
-        <module>tlias-utils</module>
+        <!-- tlias-pojo / tlias-utils / tlias-web-management-maven-module-splitting 由 tlias-parent 聚合，不可在此重复声明 -->
         <module>tlias-parent</module>
     </modules>
 

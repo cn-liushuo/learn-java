@@ -1,6 +1,6 @@
 # tlias-web-management-maven-module-splitting
 
-Tlias 智能学习辅助系统后端（Maven 分模块设计与开发练习版），由 [tlias-web-management](../tlias-web-management/README.md) 复制而来，用于练习按模块拆分工程。当前实现包含：
+Tlias 智能学习辅助系统后端（Maven 分模块设计与开发练习版），由 [tlias-web-management](../tlias-web-management/README.md) 复制而来：实体类拆到 `tlias-pojo`，工具类拆到 `tlias-utils`，依赖版本由父工程 `tlias-parent` 统一管理。业务功能与原项目一致：
 
 - 部门管理、员工分页与条件查询、员工新增 / 修改 / 批量删除
 - 员工登录（JWT）与登录校验拦截器；Cookie / Session 演示
@@ -12,6 +12,25 @@ Tlias 智能学习辅助系统后端（Maven 分模块设计与开发练习版�
 
 上级模块说明见 [DJavaWeb/README.md](../README.md)，完整业务接口见 [API 接口文档](src/main/resources/API/api接口文档.md)。
 
+## 模块拆分
+
+```text
+DJavaWeb/                                     # 聚合父工程，继承 spring-boot-starter-parent 2.6.13
+└── tlias-parent/                             # Tlias 父工程（packaging=pom）：聚合下面 3 个模块
+    ├── ../tlias-pojo/                        # 实体类
+    ├── ../tlias-utils/                       # 工具类
+    └── ../tlias-web-management-maven-module-splitting/   # Web 工程（本目录）
+```
+
+| 模块 | 坐标 | 内容 |
+|------|------|------|
+| [`tlias-parent`](../tlias-parent/pom.xml) | `com.example:tlias-parent:1.0-SNAPSHOT` | 父工程 + 聚合：`dependencyManagement` 统一管理 `spring-boot-starter-web`、`aliyun-sdk-oss`、`jjwt`、`spring-boot-configuration-processor` 版本；所有子模块共用 Lombok；`distributionManagement` 指向私服 Nexus |
+| [`tlias-pojo`](../tlias-pojo/pom.xml) | `com.example:tlias-pojo:1.0-SNAPSHOT` | `com.example.pojo`：`Dept`、`DeptLog`、`Emp`、`OperateLog`、`PageBean`、`Result` |
+| [`tlias-utils`](../tlias-utils/pom.xml) | `com.example:tlias-utils:1.0-SNAPSHOT` | `com.example.utils`：`AliOSSUtils`、`AliOSSProperties`（OSS 上传）、`JwtUtils`（JWT 生成 / 解析） |
+| 本工程 | `com.example:tlias-web-management-maven-module-splitting:0.0.1-SNAPSHOT` | Controller / Service / Mapper / 拦截器 / AOP 等 Web 层代码，依赖 `tlias-pojo` 与 `tlias-utils` |
+
+拆分后包名保持 `com.example.pojo` / `com.example.utils` 不变，业务代码的 `import` 无需修改；启动类位于 `com.example` 包下，组件扫描可以覆盖 `tlias-utils` 中的 `@Component`。
+
 ## 技术栈
 
 - JDK 8、Maven
@@ -19,11 +38,11 @@ Tlias 智能学习辅助系统后端（Maven 分模块设计与开发练习版�
 - MyBatis Spring Boot Starter `2.2.2`
 - PageHelper `1.4.7`
 - MySQL Connector/J
-- 阿里云 OSS SDK `3.18.4`
-- JWT：jjwt `0.9.1`（`JwtUtils`，登录成功后下发令牌）
+- 阿里云 OSS SDK `3.18.4`（经 `tlias-utils` 引入）
+- JWT：jjwt `0.9.1`（经 `tlias-utils` 引入，登录成功后下发令牌）
 - fastjson `1.2.84`（拦截器手动返回 JSON、AOP 序列化返回值）
 - Nacos 服务注册发现：`spring-cloud-starter-alibaba-nacos-discovery` `2021.0.5.0`
-- Lombok
+- Lombok `1.18.24`（由 `tlias-parent` 统一引入）
 
 ## 环境准备
 
@@ -36,15 +55,46 @@ Tlias 智能学习辅助系统后端（Maven 分模块设计与开发练习版�
 
    `application.yml` 中的 `aliyun.oss.endpoint`、`aliyun.oss.bucketName` 和 `aliyun.oss.region` 需要改成自己的 OSS 信息。
 4. `application.yml` 配置了 Nacos 注册中心地址 `127.0.0.1:8848`，注册的服务名为 `ls-tlias-maven-module-splitting`（与原 `tlias-web-management` 的 `ls-tlias` 区分）。本地未启动 Nacos 时，需要先启动 Nacos，或移除 Nacos 依赖与配置。
+5. Nacos 2.x 客户端除 `8848` 外还需要 gRPC 端口 `9848`。用 Docker 运行 Nacos 时需同时映射 `8848`、`9848`、`9849`，否则启动时报 `Client not connected, current status:STARTING`。
 
-## 启动
+## 构建与启动
+
+推荐在父工程目录一次构建全部模块，Maven 会按依赖顺序先构建 `tlias-pojo`、`tlias-utils`：
+
+```bash
+cd DJavaWeb/tlias-parent
+mvn install
+```
+
+之后启动 Web 工程：
 
 ```bash
 cd DJavaWeb/tlias-web-management-maven-module-splitting
 mvn spring-boot:run
 ```
 
-后端默认使用 `8081` 端口（本机 `8080` 已被 Docker 中的 Jenkins 容器占用），启动类为 `com.example.TliasWebManagementApplication`（含 `@ServletComponentScan` 用于扫描 `@WebFilter`，`@EnableDiscoveryClient` 用于注册到 Nacos）。仓库中还保留了构建后的前端资源，入口位于 `src/main/resources/FE/nginx-1.22.0-tlias/html/`；前端通过 Nginx 将 `/api` 请求代理到后端 `http://localhost:8081`（见 `conf/nginx.conf`）。
+- 后端端口为 `8082`（见 `application.yml` 的 `server.port`），启动类为 `com.example.TliasWebManagementMavenModuleSplittingApplication`（含 `@ServletComponentScan` 用于扫描 `@WebFilter`，`@EnableDiscoveryClient` 用于注册到 Nacos）。
+- 本工程 `pom.xml` 设置了 `<skipTests>true</skipTests>`，`install` / `package` 时跳过测试执行（测试类仍会编译）；需要运行测试时加 `-DskipTests=false`。
+- 单独在本目录构建时，`tlias-pojo`、`tlias-utils` 及其父工程 `tlias-parent`、`DJavaWeb` 都从本地仓库读取。若报 `Could not find artifact com.example:DJavaWeb:pom:1.0-SNAPSHOT`，先在 `DJavaWeb` 目录执行 `mvn -N install` 安装聚合父 POM，再按上面的方式在 `tlias-parent` 执行 `mvn install`。
+- 修改 `tlias-pojo` / `tlias-utils` 后，需要重新 `install`，或在 `DJavaWeb` 目录执行 `mvn compile -pl tlias-web-management-maven-module-splitting -am` 一起构建。
+
+仓库中还保留了构建后的前端资源，入口位于 `src/main/resources/FE/nginx-1.22.0-tlias/html/`；前端通过 Nginx（监听 `90`）将 `/api` 请求代理到后端，代理地址见 `conf/nginx.conf` 中的 `proxy_pass`，需与后端端口保持一致。
+
+## 发布到私服
+
+`tlias-parent` 的 `distributionManagement` 配置了本地 Nexus（`http://localhost:8091`）：
+
+| 仓库 id | 地址 | 用途 |
+|---------|------|------|
+| `maven-releases` | `/repository/maven-releases/` | 发布 release 版本 |
+| `maven-snapshots` | `/repository/maven-snapshots/` | 发布 SNAPSHOT 版本（当前各模块均为 SNAPSHOT） |
+
+在 `tlias-parent` 目录执行 `mvn deploy` 会依次发布 4 个模块。Maven `settings.xml` 需要：
+
+1. `<servers>` 中配置 `maven-releases`、`maven-snapshots` 的账号，用于上传。
+2. 若 `<mirrors>` 把所有仓库（`mirrorOf=*`）镜像到 Nexus 的 `maven-public`，且 Nexus 关闭了匿名访问，还需要为 `maven-public` 配置同一账号，否则下载依赖时报 `Not authorized`。
+
+账号密码只写在本机 `settings.xml` 中，不要提交到仓库。
 
 ## 当前接口
 
@@ -88,6 +138,7 @@ mvn spring-boot:run
 
 ```text
 src/main/java/com/example/
+├── TliasWebManagementMavenModuleSplittingApplication.java   # 启动类
 ├── anno/         # 自定义注解 @Log
 ├── aop/          # LogAspect：AOP 记录操作日志
 ├── config/       # WebConfig：注册拦截器
@@ -96,12 +147,10 @@ src/main/java/com/example/
 ├── Filter/       # Servlet Filter 入门（AbcFilter、DemoFilter、LoginCheckFilter）
 ├── interceptor/  # LoginCheckInterceptor：登录校验拦截器
 ├── mapper/       # MyBatis Mapper（含 DeptLogMapper、OperateLogMapper）
-├── pojo/         # Dept、DeptLog、Emp、OperateLog、PageBean、Result
-├── service/      # 业务逻辑、分页与事务示例（解散部门）
-└── utils/        # OSS、JWT 等工具
+└── service/      # 业务逻辑、分页与事务示例（解散部门）
 ```
 
-MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数据库脚本位于 `src/main/resources/SQL/tlias.sql`（含 `dept_log`、`operate_log`）。
+实体类在 [`tlias-pojo`](../tlias-pojo/src/main/java/com/example/pojo)，工具类在 [`tlias-utils`](../tlias-utils/src/main/java/com/example/utils)。MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数据库脚本位于 `src/main/resources/SQL/tlias.sql`（含 `dept_log`、`operate_log`）。
 
 | 目录 | 笔记 |
 |------|------|
@@ -115,6 +164,8 @@ MyBatis XML 位于 `src/main/resources/com/example/mapper/EmpMapper.xml`，数�
 ## 相关链接
 
 - 上级模块：[DJavaWeb/README.md](../README.md)
+- 拆分前的原项目：[tlias-web-management/README.md](../tlias-web-management/README.md)
+- 父工程：[tlias-parent/pom.xml](../tlias-parent/pom.xml)
 - Filter 笔记：[Filter/README.md](src/main/java/com/example/Filter/README.md)
 - 拦截器笔记：[interceptor/README.md](src/main/java/com/example/interceptor/README.md)
 - 配置类笔记：[config/README.md](src/main/java/com/example/config/README.md)

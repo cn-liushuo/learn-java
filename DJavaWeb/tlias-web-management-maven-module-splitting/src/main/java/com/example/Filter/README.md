@@ -4,7 +4,7 @@ Tlias 工程中的 Servlet Filter 入门示例，对应源码 [`DemoFilter`](Dem
 
 > 当前三个类的 `@WebFilter` 均已注释，登录校验改由拦截器 [`LoginCheckInterceptor`](../interceptor/README.md) 完成。学习 Filter 时取消对应注解的注释并重启即可。
 
-上级说明见 [tlias-web-management-maven-module-splitting/README.md](../../../../../../README.md)。启用注解式 Filter 需在启动类上保留 `@ServletComponentScan`（见 `TliasWebManagementApplication`）。
+上级说明见 [tlias-web-management-maven-module-splitting/README.md](../../../../../../README.md)。启用注解式 Filter 需在启动类上保留 `@ServletComponentScan`（见 `TliasWebManagementMavenModuleSplittingApplication`）。
 
 ---
 
@@ -86,8 +86,8 @@ Abc 拦截到了请求...放行后的逻辑
 ## 运行观察
 
 1. 取消 `DemoFilter`、`AbcFilter` 上 `@WebFilter(urlPatterns = "/*")` 的注释
-2. 启动 Tlias：在 `tlias-web-management-maven-module-splitting` 目录执行 `mvn spring-boot:run`（默认端口 `8081`）
-3. 请求任意业务接口，例如：`GET http://localhost:8081/depts`（拦截器仍会校验令牌，请求头需带 `token`，或观察 `POST /login`）
+2. 启动 Tlias：在 `tlias-web-management-maven-module-splitting` 目录执行 `mvn spring-boot:run`（端口 `8082`）
+3. 请求任意业务接口，例如：`GET http://localhost:8082/depts`（拦截器仍会校验令牌，请求头需带 `token`，或观察 `POST /login`）
 4. 查看控制台是否出现上述 Abc → Demo 的放行前 / 放行后日志
 
 观察完毕后恢复注释，避免把学习用改动当成业务必改项提交。若启用 `LoginCheckFilter`，应同时关闭拦截器版登录校验，避免同一请求被重复校验。
@@ -97,6 +97,6 @@ Abc 拦截到了请求...放行后的逻辑
 ## 相关链接
 
 - 上级模块：[tlias-web-management-maven-module-splitting/README.md](../../../../../../README.md)
-- 启动类：`com.example.TliasWebManagementApplication`（含 `@ServletComponentScan`）
+- 启动类：`com.example.TliasWebManagementMavenModuleSplittingApplication`（含 `@ServletComponentScan`）
 - 拦截器笔记：[interceptor/README.md](../interceptor/README.md)
 - 全仓库文档索引：[docs/README.md](../../../../../../../../docs/README.md)

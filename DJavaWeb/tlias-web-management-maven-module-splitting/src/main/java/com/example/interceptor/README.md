@@ -31,7 +31,7 @@ Spring MVC 的 `HandlerInterceptor` 接口常用三个方法：
 1. 获取请求 URL；包含 `login` 则直接放行
 2. 读取请求头 `token`
 3. 令牌为空：返回 `Result.error("NOT_LOGIN")`，结束请求
-4. 用 [`JwtUtils`](../utils/JwtUtils.java) 解析令牌；解析失败（过期、被篡改等）同样返回 `NOT_LOGIN`
+4. 用 `tlias-utils` 模块中的 [`JwtUtils`](../../../../../../../tlias-utils/src/main/java/com/example/utils/JwtUtils.java) 解析令牌；解析失败（过期、被篡改等）同样返回 `NOT_LOGIN`
 5. 解析成功则放行
 
 返回错误时，拦截器不经过 `@RestController`，需要用 fastjson 的 `JSONObject.toJSONString` 手动把 `Result` 转成 JSON，再通过 `response.getWriter().write(...)` 写回。前端收到 `NOT_LOGIN` 后跳转登录页。
@@ -95,9 +95,9 @@ Spring MVC 的 `HandlerInterceptor` 接口常用三个方法：
 
 ## 运行观察
 
-1. 启动 Tlias：在 `tlias-web-management-maven-module-splitting` 目录执行 `mvn spring-boot:run`（默认端口 `8081`）
-2. 不带令牌请求 `GET http://localhost:8081/depts`：返回 `{"code":0,"msg":"NOT_LOGIN"}`，控制台打印「请求头token为空，返回未登录的信息」
-3. 请求登录接口 `POST http://localhost:8081/login`，请求体示例（账号来自 `tlias.sql` 初始化数据）：
+1. 启动 Tlias：在 `tlias-web-management-maven-module-splitting` 目录执行 `mvn spring-boot:run`（端口 `8082`）
+2. 不带令牌请求 `GET http://localhost:8082/depts`：返回 `{"code":0,"msg":"NOT_LOGIN"}`，控制台打印「请求头token为空，返回未登录的信息」
+3. 请求登录接口 `POST http://localhost:8082/login`，请求体示例（账号来自 `tlias.sql` 初始化数据）：
 
 ```json
 {"username": "jinyong", "password": "123456"}
