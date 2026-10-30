@@ -1,0 +1,44 @@
+server:
+  port: 8081
+  address: 127.0.0.1
+
+spring:
+  # 数据库的连接信息
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://mysql8:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://172.16.2.10:3306/tlias?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root123456
+  # 文件上传的配置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+  application:
+    name: ls-tlias-maven-module-splitting
+  cloud:
+    nacos:
+      discovery:
+#        server-addr: nacos-standalone:8848
+        server-addr: 127.0.0.1:8848
+#        server-addr: 172.16.2.10:8848
+
+# Mybatis 配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 阿里云OSS配置
+aliyun:
+  oss:
+    endpoint: https://oss-cn-wulanchabu.aliyuncs.com
+    bucketName: liushuo-web-tlias
+    region: cn-wulanchabu
+
+# spring事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug

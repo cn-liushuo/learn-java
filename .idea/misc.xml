@@ -22,6 +22,7 @@
         <option value="$PROJECT_DIR$/DJavaWeb/aliyun-oss-spring-boot-starter/pom.xml" />
         <option value="$PROJECT_DIR$/DJavaWeb/aliyun-oss-spring-boot-autoconfigure/pom.xml" />
         <option value="$PROJECT_DIR$/DJavaWeb/springboot-autoconfiguration-test/pom.xml" />
+        <option value="$PROJECT_DIR$/DJavaWeb/tlias-web-management-maven-module-splitting/pom.xml" />
       </list>
     </option>
   </component>

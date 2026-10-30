@@ -1,0 +1,16 @@
+server:
+  port: 8000
+  address: 127.0.0.1
+
+# 定义对象/Map集合
+user:
+  name: Tom
+  age: 20
+  address: beijing
+
+# 定义数组/List/Set
+hobby:
+  - java
+  - c
+  - game
+  - sport
