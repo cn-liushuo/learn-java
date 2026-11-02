@@ -13,6 +13,7 @@
         <module>BJavaSEBasic</module>
         <module>CJavaSEPorjectMax</module>
         <module>DJavaWeb</module>
+        <module>sky-take-out</module>
     </modules>
 
     <properties>
