@@ -41,7 +41,6 @@ DJavaWeb/                                     # 聚合父工程，继承 spring-
 - 阿里云 OSS SDK `3.18.4`（经 `tlias-utils` 引入）
 - JWT：jjwt `0.9.1`（经 `tlias-utils` 引入，登录成功后下发令牌）
 - fastjson `1.2.84`（拦截器手动返回 JSON、AOP 序列化返回值）
-- Nacos 服务注册发现：`spring-cloud-starter-alibaba-nacos-discovery` `2021.0.5.0`
 - Lombok `1.18.24`（由 `tlias-parent` 统一引入）
 
 ## 环境准备
@@ -60,8 +59,6 @@ DJavaWeb/                                     # 聚合父工程，继承 spring-
    - `OSS_ACCESS_KEY_SECRET`
 
    `application.yml` 中的 `aliyun.oss.endpoint`、`aliyun.oss.bucketName` 和 `aliyun.oss.region` 需要改成自己的 OSS 信息。
-4. `application.yml` 配置了 Nacos 注册中心地址 `127.0.0.1:8848`，注册的服务名为 `ls-tlias-maven-module-splitting`（与原 `tlias-web-management` 的 `ls-tlias` 区分）。本地未启动 Nacos 时，需要先启动 Nacos，或移除 Nacos 依赖与配置。
-5. Nacos 2.x 客户端除 `8848` 外还需要 gRPC 端口 `9848`。用 Docker 运行 Nacos 时需同时映射 `8848`、`9848`、`9849`，否则启动时报 `Client not connected, current status:STARTING`。
 
 ## 构建与启动
 
@@ -79,7 +76,7 @@ cd DJavaWeb/tlias-web-management-maven-module-splitting
 mvn spring-boot:run
 ```
 
-- 后端端口为 `8082`（见 `application.yml` 的 `server.port`），启动类为 `com.example.TliasWebManagementMavenModuleSplittingApplication`（含 `@ServletComponentScan` 用于扫描 `@WebFilter`，`@EnableDiscoveryClient` 用于注册到 Nacos）。
+- 后端端口为 `8082`（见 `application.yml` 的 `server.port`），启动类为 `com.example.TliasWebManagementMavenModuleSplittingApplication`（含 `@ServletComponentScan` 用于扫描 `@WebFilter`）。
 - 本工程 `pom.xml` 设置了 `<skipTests>true</skipTests>`，`install` / `package` 时跳过测试执行（测试类仍会编译）；需要运行测试时加 `-DskipTests=false`。
 - 单独在本目录构建时，`tlias-pojo`、`tlias-utils` 及其父工程 `tlias-parent`、`DJavaWeb` 都从本地仓库读取。若报 `Could not find artifact com.example:DJavaWeb:pom:1.0-SNAPSHOT`，先在 `DJavaWeb` 目录执行 `mvn -N install` 安装聚合父 POM，再按上面的方式在 `tlias-parent` 执行 `mvn install`。
 - 修改 `tlias-pojo` / `tlias-utils` 后，需要重新 `install`，或在 `DJavaWeb` 目录执行 `mvn compile -pl tlias-web-management-maven-module-splitting -am` 一起构建。

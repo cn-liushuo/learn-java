@@ -17,7 +17,7 @@
 | 文档 | 内容 |
 |------|------|
 | [Vue 前端](../DJavaWeb/vue-project/README.md) | Vue 2、Element UI、部门与员工页面 |
-| [Tlias 后端](../DJavaWeb/tlias-web-management/README.md) | 当前后端实现、数据库、OSS / Nacos 配置、登录校验、全局异常、AOP 操作日志和启动方式 |
+| [Tlias 后端](../DJavaWeb/tlias-web-management/README.md) | 当前后端实现、数据库、OSS 配置、登录校验、全局异常、AOP 操作日志和启动方式 |
 | [Tlias Filter](../DJavaWeb/tlias-web-management/src/main/java/com/example/Filter/README.md) | Servlet Filter 入门：执行流程、拦截路径、过滤器链与运行观察 |
 | [Tlias Interceptor](../DJavaWeb/tlias-web-management/src/main/java/com/example/interceptor/README.md) | Spring MVC 拦截器：JWT 登录校验、执行流程、与 Filter 的区别 |
 | [Tlias Config](../DJavaWeb/tlias-web-management/src/main/java/com/example/config/README.md) | `WebConfig` 注册拦截器与路径规则 |

@@ -43,7 +43,6 @@ learn-java/
 | **IDE** | IntelliJ IDEA / Eclipse；使用 Lombok 的模块需开启注解处理 |
 | **Node.js LTS** | 仅 [vue-project](DJavaWeb/vue-project/README.md) 需要 |
 | **MySQL 8.x** | SQL 练习、MyBatis 两个工程、Tlias、AOP 入门需要。SQL 练习说明见 [static/SQL](DJavaWeb/springboot-web-req-resp/src/main/resources/static/SQL/README.md) |
-| **Nacos** | 仅两个 Tlias Web 工程需要（注册中心 `127.0.0.1:8848`，2.x 客户端另需 gRPC 端口 `9848`） |
 | **Nexus**（可选） | 仅 Tlias 分模块 `mvn deploy` 时需要（`http://localhost:8091`），见 [Tlias 分模块 README](DJavaWeb/tlias-web-management-maven-module-splitting/README.md) |
 
 主要依赖版本见各模块 README。

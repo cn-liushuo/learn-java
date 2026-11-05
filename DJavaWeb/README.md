@@ -14,8 +14,7 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 2. IDE：IntelliJ IDEA / Eclipse
 3. **Node.js LTS**：仅 [vue-project](vue-project/README.md) 需要
 4. **MySQL 8.x**：SQL 练习、MyBatis 两个工程、Tlias、AOP 入门需要。SQL 练习说明见 [static/SQL](springboot-web-req-resp/src/main/resources/static/SQL/README.md)
-5. **Nacos**：仅两个 Tlias Web 工程需要（注册中心 `127.0.0.1:8848`；Nacos 2.x 客户端还需 gRPC 端口 `9848`，Docker 部署时需同时映射 `8848`、`9848`、`9849`）
-6. **Nexus 私服**（可选）：仅 `tlias-parent` 执行 `mvn deploy` 时需要（`http://localhost:8091`），配置见 [Tlias 分模块 README](tlias-web-management-maven-module-splitting/README.md#发布到私服)
+5. **Nexus 私服**（可选）：仅 `tlias-parent` 执行 `mvn deploy` 时需要（`http://localhost:8091`），配置见 [Tlias 分模块 README](tlias-web-management-maven-module-splitting/README.md#发布到私服)
 
 聚合父工程 `DJavaWeb/pom.xml`（`com.example:DJavaWeb:1.0-SNAPSHOT`）继承 `spring-boot-starter-parent` `2.6.13`。
 
@@ -29,7 +28,7 @@ JavaWeb 学习模块：前端（HTML / CSS / JS / Ajax / Vue）、Maven 多模�
 | `springboot-web-req-resp` | Spring Boot `2.7.6`、dom4j `2.1.3`（XML 解析） |
 | `springboot-mybatis-quickstart` | Spring Boot `2.6.13`、MyBatis `2.2.2`、Druid `1.2.28`、MySQL 驱动 |
 | `springboot-mybatis-crud` | Spring Boot `2.6.13`、MyBatis `2.2.2`、MySQL 驱动 |
-| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、阿里云 OSS SDK `3.18.4`、jjwt `0.9.1`、fastjson `1.2.84`、AOP、Nacos Discovery `2021.0.5.0`、Lombok、MySQL 驱动 |
+| `tlias-web-management` | Spring Boot `2.6.13`、MyBatis `2.2.2`、PageHelper `1.4.7`、阿里云 OSS SDK `3.18.4`、jjwt `0.9.1`、fastjson `1.2.84`、AOP、Lombok、MySQL 驱动 |
 | `tlias-parent` | 父工程（`pom`）：`dependencyManagement` 管理 `spring-boot-starter-web` `2.6.13`、OSS SDK `3.18.4`、jjwt `0.9.1`、`spring-boot-configuration-processor`；统一引入 Lombok `1.18.24`；`distributionManagement` 指向 Nexus |
 | `tlias-pojo` | 仅继承 `tlias-parent`（Lombok） |
 | `tlias-utils` | `spring-boot-starter-web`、OSS SDK、jjwt、`spring-boot-configuration-processor`（版本由 `tlias-parent` 管理） |
@@ -101,7 +100,7 @@ DJavaWeb/
 | `aliyun-oss-spring-boot-autoconfigure` | `AlOSSAutoConfiguration`（`@EnableConfigurationProperties(AliOSSProperties.class)` + `@Bean AliOSSUtils`），通过 `META-INF/spring.factories` 注册；配置前缀 `aliyun.oss` |
 | `aliyun-oss-spring-boot-starter` | Starter 命名规范示例：本身无代码，只依赖 `aliyun-oss-spring-boot-autoconfigure` |
 | `springboot-autoconfiguration-test` | 引入 `aliyun-oss-spring-boot-starter` 后无需 `@Import` / `@ComponentScan`，`UploadController` 直接 `@Autowired AliOSSUtils`，`POST /upload` 上传图片 |
-| [`tlias-web-management-maven-module-splitting`](tlias-web-management-maven-module-splitting/README.md) | Tlias 分模块版：实体类拆到 `tlias-pojo`、工具类拆到 `tlias-utils`，由 `tlias-parent` 聚合并统一版本；Nacos 服务名 `ls-tlias-maven-module-splitting`；支持 `mvn deploy` 到 Nexus |
+| [`tlias-web-management-maven-module-splitting`](tlias-web-management-maven-module-splitting/README.md) | Tlias 分模块版：实体类拆到 `tlias-pojo`、工具类拆到 `tlias-utils`，由 `tlias-parent` 聚合并统一版本；支持 `mvn deploy` 到 Nexus |
 | `tlias-parent` / `tlias-pojo` / `tlias-utils` | 分模块的父工程 / 实体类 / 工具类，说明见 [Tlias 分模块 README](tlias-web-management-maven-module-splitting/README.md#模块拆分) |
 
 ---
@@ -195,7 +194,6 @@ mvn spring-boot:run
 4. 接口入口：`/depts`、`/emps`、`/login`、`/upload` 等，详见 [Tlias README](tlias-web-management/README.md) 与 [API 接口文档](tlias-web-management/src/main/resources/API/api接口文档.md)
 5. 除 `/login` 外的请求需在请求头 `token` 中携带 JWT；Filter / 拦截器 / 事务笔记见 Tlias README 中的「代码结构」
 6. 配套前端为构建产物，入口在 `src/main/resources/FE/nginx-1.22.0-tlias/html/`
-7. 已接入 Nacos 注册中心（`127.0.0.1:8848`），本地需先启动 Nacos
 
 **Tlias 分模块（Maven 分模块设计与私服）**
 
@@ -243,14 +241,14 @@ mvn spring-boot:run
 | `springboot-web-req-resp/` | 参数绑定、统一响应、员工列表；`static/SQL` 为 MySQL 练习 |
 | `springboot-mybatis-quickstart/` | 先执行 `mybatis.sql`，再运行启动类；注解查询 `user` |
 | `springboot-mybatis-crud/` | 在库 `mybatis` 中执行 `emp.sql`，再运行启动类；员工表增删改查 |
-| `tlias-web-management/` | 先执行 `tlias.sql`，按 [Tlias README](tlias-web-management/README.md) 配置数据库、OSS 与 Nacos，再 `mvn spring-boot:run`；`/depts`、`/emps`、`/login`、`/upload` 见 API / README |
+| `tlias-web-management/` | 先执行 `tlias.sql`，按 [Tlias README](tlias-web-management/README.md) 配置数据库与 OSS，再 `mvn spring-boot:run`；`/depts`、`/emps`、`/login`、`/upload` 见 API / README |
 | `springboot-aop-quickstart/` | 打开需要的切面类 `@Aspect`，运行测试类观察通知日志 |
 | `springboot-web-config/` | 切换三种配置文件与启动参数，观察端口变化 |
 | `springboot-web-config2/` | 先 `mvn install` `itheima-utils`，再运行 Bean 管理与自动配置测试 |
 | `aliyun-oss-spring-boot-*/` | 自定义 Starter：先 `mvn install`，供 `springboot-autoconfiguration-test` 引用 |
 | `springboot-autoconfiguration-test/` | 配置 OSS 环境变量后运行启动类，`POST /upload` 验证自定义 Starter |
 | `tlias-parent/` | 执行 `mvn install` 构建全部 Tlias 分模块，`mvn deploy` 发布到 Nexus |
-| `tlias-web-management-maven-module-splitting/` | 分模块版 Tlias，端口 `8082`；数据库 / OSS / Nacos 配置同原项目 |
+| `tlias-web-management-maven-module-splitting/` | 分模块版 Tlias，端口 `8082`；数据库 / OSS 配置同原项目 |
 
 建议学习顺序：前端静态页 → Vue → Maven → HTTP Server → Spring Boot 快速入门 → 请求/响应与三层架构 → MySQL SQL 练习 → MyBatis 入门 → MyBatis CRUD → Tlias（含 Filter / 拦截器 / 事务）→ AOP 入门 → Tlias AOP 操作日志 → 配置优先级 → Bean 管理 → SpringBoot 原理 → 自定义 Starter → Maven 分模块（Tlias 拆分）与私服。
 

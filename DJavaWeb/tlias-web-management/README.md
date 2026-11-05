@@ -22,7 +22,6 @@ Tlias 智能学习辅助系统后端，当前实现包含：
 - 阿里云 OSS SDK `3.18.4`
 - JWT：jjwt `0.9.1`（`JwtUtils`，登录成功后下发令牌）
 - fastjson `1.2.84`（拦截器手动返回 JSON、AOP 序列化返回值）
-- Nacos 服务注册发现：`spring-cloud-starter-alibaba-nacos-discovery` `2021.0.5.0`
 - Lombok
 
 ## 环境准备
@@ -41,7 +40,6 @@ Tlias 智能学习辅助系统后端，当前实现包含：
    - `OSS_ACCESS_KEY_SECRET`
 
    `application.yml` 中的 `aliyun.oss.endpoint`、`aliyun.oss.bucketName` 和 `aliyun.oss.region` 需要改成自己的 OSS 信息。
-4. `application.yml` 配置了 Nacos 注册中心地址 `127.0.0.1:8848`。本地未启动 Nacos 时，需要先启动 Nacos，或移除 Nacos 依赖与配置。
 
 ## 启动
 
@@ -50,7 +48,7 @@ cd DJavaWeb/tlias-web-management
 mvn spring-boot:run
 ```
 
-后端默认使用 `8080` 端口，启动类为 `com.example.TliasWebManagementApplication`（含 `@ServletComponentScan` 用于扫描 `@WebFilter`，`@EnableDiscoveryClient` 用于注册到 Nacos）。仓库中还保留了构建后的前端资源，入口位于 `src/main/resources/FE/nginx-1.22.0-tlias/html/`；前端通过 Nginx 将 `/api` 请求代理到后端。
+后端默认使用 `8080` 端口，启动类为 `com.example.TliasWebManagementApplication`（含 `@ServletComponentScan` 用于扫描 `@WebFilter`）。仓库中还保留了构建后的前端资源，入口位于 `src/main/resources/FE/nginx-1.22.0-tlias/html/`；前端通过 Nginx 将 `/api` 请求代理到后端。
 
 ## 当前接口
 
