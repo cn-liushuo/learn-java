@@ -27,8 +27,14 @@ Tlias 智能学习辅助系统后端，当前实现包含：
 
 ## 环境准备
 
-1. 创建 MySQL 8.x 数据库，并执行 [tlias.sql](src/main/resources/SQL/tlias.sql)。脚本会创建 `tlias` 数据库，以及 `dept` 部门表、`emp` 员工表、`dept_log` 部门操作日志表、`operate_log` 操作日志表。
-2. 检查 [application.yml](src/main/resources/application.yml) 中的数据库连接配置。
+1. 数据库脚本见 [tlias.sql](src/main/resources/SQL/tlias.sql)，写入统一的 `lean_java` 库，表名带 `tlias_` 前缀（`tlias_dept`、`tlias_emp`、`tlias_dept_log`、`tlias_operate_log`）。
+2. 数据库连接信息不再写在配置文件里，启动前需要设置以下环境变量：
+
+   - `DB_URL`：`host:port`，例如 `mysql6.sqlpub.com:3311`（不含 `jdbc:mysql://` 前缀与库名，配置中已补全）
+   - `DB_USERNAME`
+   - `DB_PASSWORD`
+
+   `application.yml` 中拼成 `jdbc:mysql://${DB_URL}/lean_java?...` 的完整连接串。
 3. 图片上传需要设置以下环境变量，代码不会从 Markdown 或源码中读取凭据：
 
    - `OSS_ACCESS_KEY_ID`

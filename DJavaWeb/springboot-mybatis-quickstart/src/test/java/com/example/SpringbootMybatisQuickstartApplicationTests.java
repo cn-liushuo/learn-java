@@ -32,14 +32,15 @@ class SpringbootMybatisQuickstartApplicationTests {
         // 1、注册驱动
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        // 2、获取连接对象
-        String url = "jdbc:mysql://127.0.0.1:3306/mybatis";
-        String username = "root";
-        String password = "root";
+        String url = "jdbc:mysql://" + System.getenv("DB_URL")
+                + "/lean_java?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+                + "&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true";
+        String username = System.getenv("DB_USERNAME");
+        String password = System.getenv("DB_PASSWORD");
         Connection connection = DriverManager.getConnection(url, username, password);
 
         // 3、获取执行 SQL 的对象 Statement，执行 SQL，返回结果
-        String sql = "select * from user";
+        String sql = "select * from mybatis_user";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 

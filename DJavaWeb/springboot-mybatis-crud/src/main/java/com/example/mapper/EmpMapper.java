@@ -10,23 +10,23 @@ import java.util.List;
 public interface EmpMapper {
 
     // 根据 ID 删除数据
-    @Delete("delete from emp where id = #{id}")
+    @Delete("delete from mybatis_emp where id = #{id}")
     public void delete(Integer id);
     // public int delete(Integer id);
 
     // 新增员工
     @Options(useGeneratedKeys = true, keyProperty = "id") // 获取返回的主键
-    @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+    @Insert("insert into mybatis_emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
             "VALUES (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, #{createTime}, #{updateTime})")
     public void insert(Emp emp);
 
     // 更新员工
-    @Update("update emp set username = #{username}, name = #{name}, gender = #{gender}, image = #{image}, job = #{job}, entrydate = #{entrydate}, dept_id = #{deptId}, update_time = #{updateTime} where id = #{id}")
+    @Update("update mybatis_emp set username = #{username}, name = #{name}, gender = #{gender}, image = #{image}, job = #{job}, entrydate = #{entrydate}, dept_id = #{deptId}, update_time = #{updateTime} where id = #{id}")
     public void update(Emp emp);
 
     // 方案三：开启 mybatis 的驼峰命名自动映射的开关 --- a_column ------> aColumn
     // 根据 ID 查询员工
-    @Select("select * from emp where id = #{id}")
+    @Select("select * from mybatis_emp where id = #{id}")
     public Emp getById(Integer id);
 
     // 方案一：给字段起别名，让别名与实体类属性一致

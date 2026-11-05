@@ -15,7 +15,7 @@ public interface DeptMapper {
      *
      * @return
      */
-    @Select("select * from dept;")
+    @Select("select * from tlias_dept;")
     List<Dept> list();
 
     /**
@@ -23,7 +23,7 @@ public interface DeptMapper {
      *
      * @param id
      */
-    @Delete("delete from dept where id = #{id}")
+    @Delete("delete from tlias_dept where id = #{id}")
     void deleteById(Integer id);
 
     /**
@@ -31,7 +31,7 @@ public interface DeptMapper {
      *
      * @param dept
      */
-    @Insert("insert into dept (name, create_time, update_time) VALUES (#{name}, #{createTime}, #{updateTime})")
+    @Insert("insert into tlias_dept (name, create_time, update_time) VALUES (#{name}, #{createTime}, #{updateTime})")
     void insert(Dept dept);
 
     /**
@@ -40,7 +40,7 @@ public interface DeptMapper {
      * @param id
      * @return
      */
-    @Select("select * from dept where id = #{id}")
+    @Select("select * from tlias_dept where id = #{id}")
     Dept getById(Integer id);
 
     /**
@@ -48,6 +48,6 @@ public interface DeptMapper {
      *
      * @param dept
      */
-    @Update("update dept set name = #{name}, create_time = #{createTime}, update_time = #{updateTime} where id = #{id}")
+    @Update("update tlias_dept set name = #{name}, create_time = #{createTime}, update_time = #{updateTime} where id = #{id}")
     void update(Dept dept);
 }

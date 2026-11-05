@@ -1,7 +1,5 @@
-create database tlias;
-
 -- 部门管理
-create table dept
+create table tlias_dept
 (
     id          int unsigned primary key auto_increment comment '主键ID',
     name        varchar(10) not null unique comment '部门名称',
@@ -9,7 +7,7 @@ create table dept
     update_time datetime    not null comment '修改时间'
 ) comment '部门表';
 
-insert into dept (id, name, create_time, update_time)
+insert into tlias_dept (id, name, create_time, update_time)
 values (1, '学工部', now(), now()),
        (2, '教研部', now(), now()),
        (3, '咨询部', now(), now()),
@@ -18,7 +16,7 @@ values (1, '学工部', now(), now()),
 
 
 -- 员工管理(带约束)
-create table emp
+create table tlias_emp
 (
     id          int unsigned primary key auto_increment comment 'ID',
     username    varchar(20)      not null unique comment '用户名',
@@ -33,7 +31,7 @@ create table emp
     update_time datetime         not null comment '修改时间'
 ) comment '员工表';
 
-INSERT INTO emp
+INSERT INTO tlias_emp
 (id, username, password, name, gender, image, job, entrydate, dept_id, create_time, update_time)
 VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(), now()),
        (2, 'zhangwuji', '123456', '张无忌', 1, '2.jpg', 2, '2015-01-01', 2, now(), now()),
@@ -53,14 +51,14 @@ VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(),
        (16, 'songyuanqiao', '123456', '宋远桥', 1, '16.jpg', 2, '2007-01-01', 2, now(), now()),
        (17, 'chenyouliang', '123456', '陈友谅', 1, '17.jpg', NULL, '2015-03-21', NULL, now(), now());
 
-create table dept_log(
+create table tlias_dept_log(
                          id int auto_increment comment '主键ID' primary key,
                          create_time datetime null comment '操作时间',
                          description varchar(300) null comment '操作描述'
 )comment '部门操作日志表';
 
 -- 操作日志表
-create table operate_log(
+create table tlias_operate_log(
                             id int unsigned primary key auto_increment comment 'ID',
                             operate_user int unsigned comment '操作人ID',
                             operate_time datetime comment '操作时间',

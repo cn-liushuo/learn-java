@@ -50,7 +50,7 @@ public interface EmpMapper {
      *
      * @param emp
      */
-    @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+    @Insert("insert into tlias_emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
             "values(#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, #{createTime}, #{updateTime})")
     void insert(Emp emp);
 
@@ -60,7 +60,7 @@ public interface EmpMapper {
      * @param id
      * @return
      */
-    @Select("select * from emp where id = #{id}")
+    @Select("select * from tlias_emp where id = #{id}")
     Emp getById(Integer id);
 
     /**
@@ -74,13 +74,13 @@ public interface EmpMapper {
      * @param emp
      * @return
      */
-    @Select("select * from emp where username = #{username} and password = #{password}")
+    @Select("select * from tlias_emp where username = #{username} and password = #{password}")
     Emp getByUsernameAndPassword(Emp emp);
 
     /**
      * 根据部门id删除该部门下员工
      * @param deptId
      */
-    @Delete("delete from emp where dept_id = #{deptId}")
+    @Delete("delete from tlias_emp where dept_id = #{deptId}")
     void deleteByDeptId(Integer deptId);
 }

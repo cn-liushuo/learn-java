@@ -16,12 +16,12 @@
                dept_id,
                create_time,
                update_time
-        from emp
+        from mybatis_emp
     </sql>
 
     <!-- 动态更新员工信息 -->
     <update id="update2">
-        update emp
+        update mybatis_emp
         <set>
             <if test="username != null">username = #{username},</if>
             <if test="name != null">name = #{name},</if>
@@ -61,7 +61,7 @@
         close: 遍历结束后拼接的 SQL 片段
      -->
     <delete id="deleteByIds">
-        delete from emp where id in
+        delete from mybatis_emp where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>

@@ -9,9 +9,12 @@ spring:
   datasource:
     druid:
       driver-class-name: ${sky.datasource.driver-class-name}
-      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      url: ${sky.datasource.url}
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
+      # 连接池最大连接数（Druid 配置项为 max-active）
+      max-active: 2
+      minimum-idle: 1   # 可选：空闲时只保留 1 条
 
 mybatis:
   #mapper配置文件

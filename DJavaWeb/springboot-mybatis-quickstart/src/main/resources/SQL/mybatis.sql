@@ -1,8 +1,6 @@
 --  =================== MyBatis 入门 ======================
-create
-database mybatis;
-
-create table user
+-- 使用统一的 lean_java 库，表名带 mybatis_ 前缀
+create table mybatis_user
 (
     id     int unsigned primary key auto_increment comment 'ID',
     name   varchar(100) comment '姓名',
@@ -11,19 +9,19 @@ create table user
     phone  varchar(11) comment '手机号'
 ) comment '用户表';
 
-insert into user(id, name, age, gender, phone)
+insert into mybatis_user(id, name, age, gender, phone)
 VALUES (null, '白眉鹰王', 55, '1', '18800000000');
-insert into user(id, name, age, gender, phone)
+insert into mybatis_user(id, name, age, gender, phone)
 VALUES (null, '金毛狮王', 45, '1', '18800000001');
-insert into user(id, name, age, gender, phone)
+insert into mybatis_user(id, name, age, gender, phone)
 VALUES (null, '青翼蝠王', 38, '1', '18800000002');
-insert into user(id, name, age, gender, phone)
+insert into mybatis_user(id, name, age, gender, phone)
 VALUES (null, '紫衫龙王', 42, '2', '18800000003');
-insert into user(id, name, age, gender, phone)
+insert into mybatis_user(id, name, age, gender, phone)
 VALUES (null, '光明左使', 37, '1', '18800000004');
-insert into user(id, name, age, gender, phone)
+insert into mybatis_user(id, name, age, gender, phone)
 VALUES (null, '光明右使', 48, '1', '18800000005');
 
 -- 1、查询所有用户信息
 select *
-from user;
+from mybatis_user;
