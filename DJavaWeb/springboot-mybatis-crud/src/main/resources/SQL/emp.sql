@@ -1,5 +1,5 @@
--- 部门管理（统一使用 lean_java 库，表名带 mybatis_ 前缀）
-create table mybatis_dept
+-- 部门管理（mybatis 库，表名不带前缀）
+create table dept
 (
     id          int unsigned primary key auto_increment comment '主键ID',
     name        varchar(10) not null unique comment '部门名称',
@@ -7,7 +7,7 @@ create table mybatis_dept
     update_time datetime    not null comment '修改时间'
 ) comment '部门表';
 
-insert into mybatis_dept (id, name, create_time, update_time)
+insert into dept (id, name, create_time, update_time)
 values (1, '学工部', now(), now()),
        (2, '教研部', now(), now()),
        (3, '咨询部', now(), now()),
@@ -16,7 +16,7 @@ values (1, '学工部', now(), now()),
 
 
 -- 员工管理
-create table mybatis_emp
+create table emp
 (
     id          int unsigned primary key auto_increment comment 'ID',
     username    varchar(20)      not null unique comment '用户名',
@@ -31,7 +31,7 @@ create table mybatis_emp
     update_time datetime         not null comment '修改时间'
 ) comment '员工表';
 
-INSERT INTO mybatis_emp
+INSERT INTO emp
 (id, username, password, name, gender, image, job, entrydate, dept_id, create_time, update_time)
 VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(), now()),
        (2, 'zhangwuji', '123456', '张无忌', 1, '2.jpg', 2, '2015-01-01', 2, now(), now()),
@@ -54,24 +54,24 @@ VALUES (1, 'jinyong', '123456', '金庸', 1, '1.jpg', 4, '2000-01-01', 2, now(),
 
 -- 根据 ID 删除数据
 delete
-from mybatis_emp
+from emp
 where id = 17;
 
 
 -- 登录
 select count(*)
-from mybatis_emp
+from emp
 where username = 'zhangwuji'
   and password = '123456';
 
 
 -- 插入数据
-insert into mybatis_emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
 VALUES ('Tom', '汤姆', 1, '1.jpg', 1, '2005-01-01', 1, now(), now());
 
 
 -- 更新数据
-update mybatis_emp
+update emp
 set username    = '',
     name        = '',
     gender      = '',
@@ -85,13 +85,13 @@ where id = 1;
 
 -- 根据 ID 查询员工
 select *
-from mybatis_emp
+from emp
 where id = 20;
 
 
 -- 条件查询员工
 select *
-from mybatis_emp
+from emp
 where name like '%张%'
   and gender = 1
   and entrydate between '2010-01-01' and '2020-01-01'
@@ -102,7 +102,7 @@ order by update_time desc;
 select concat('hello', 'mysql', 'world');
 
 select *
-from mybatis_emp
+from emp
 where name like concat('%', '张', '%')
   and gender = 1
   and entrydate between '2010-01-01' and '2020-01-01'
@@ -110,4 +110,4 @@ order by update_time desc;
 
 
 -- 批量删除 18，20，21
-delete from mybatis_emp where id in (18, 20, 21);
+delete from emp where id in (18, 20, 21);

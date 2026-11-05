@@ -45,14 +45,8 @@ DJavaWeb/                                     # 聚合父工程，继承 spring-
 
 ## 环境准备
 
-1. 数据库脚本见 [tlias.sql](src/main/resources/SQL/tlias.sql)，写入统一的 `lean_java` 库，表名带 `tlias_` 前缀（`tlias_dept`、`tlias_emp`、`tlias_dept_log`、`tlias_operate_log`）。
-2. 数据库连接信息不再写在配置文件里，启动前需要设置以下环境变量：
-
-   - `DB_URL`：`host:port`，例如 `mysql6.sqlpub.com:3311`（不含 `jdbc:mysql://` 前缀与库名，配置中已补全）
-   - `DB_USERNAME`
-   - `DB_PASSWORD`
-
-   `application.yml` 中拼成 `jdbc:mysql://${DB_URL}/lean_java?...` 的完整连接串。
+1. 数据库脚本见 [tlias.sql](src/main/resources/SQL/tlias.sql)，写入 `tlias` 库（表 `dept`、`emp`、`dept_log`、`operate_log`）。
+2. 本地 dolt 服务默认端口 `3307`，`application.yml` 中的连接配置为 `127.0.0.1:3307/tlias`，账号 `root/root`。如需改用其他实例，修改 `spring.datasource` 下的 `url`、`username`、`password`。
 3. 图片上传需要设置以下环境变量，代码不会从 Markdown 或源码中读取凭据：
 
    - `OSS_ACCESS_KEY_ID`

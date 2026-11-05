@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DeptLogMapper {
 
-    @Insert("insert into tlias_dept_log(create_time, description) VALUES (#{createTime}, #{description})")
+    @Insert("insert into dept_log(create_time, description) VALUES (#{createTime}, #{description})")
     void insert(DeptLog deptLog);
 
 }
