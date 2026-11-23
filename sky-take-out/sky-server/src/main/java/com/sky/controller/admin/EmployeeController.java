@@ -113,4 +113,11 @@ public class EmployeeController {
         employeeService.startOrStop(status, id);
         return Result.success();
     }
+
+    @PostMapping("/{id}")
+    @ApiOperation("根据id查询员工")
+    public Result<Employee> getById(@PathVariable Long id) {
+        // employeeService.getById();
+        return null;
+    }
 }
