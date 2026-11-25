@@ -1,17 +1,16 @@
 package com.sky.controller.common;
 
+import com.sky.constant.MessageConstant;
 import com.sky.result.Result;
-import com.sky.utils.AliOssUtil;
+import com.sky.utils.LocalImagePathUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -23,26 +22,21 @@ import java.util.UUID;
 @Slf4j
 public class CommonController {
 
-    @Autowired
-    private AliOssUtil aliOssUtil;
+    /**
+     * 浏览器可访问的图片 URL 前缀
+     */
+    private static final String IMAGE_URL_PREFIX = "http://localhost:8080/image/";
 
     /**
      * 文件上传
      *
-     * @param file
-     * @return
+     * @param file 上传文件
+     * @return 可访问的图片 URL
      */
     @PostMapping("/upload")
     public Result<String> upload(MultipartFile file) {
         log.info("文件上传, {}", file);
 
-        // 本地开发用这个
-        /* String path = "D:\\nutritionCloudSync\\development\\image\\" + newFileName;
-
-        // 将文件存储在本地的磁盘目录中
-        file.transferTo(new File(path)); */
-
-        // 阿里云OSS
         try {
             // 原始文件名
             String originalFilename = file.getOriginalFilename();
@@ -52,13 +46,18 @@ public class CommonController {
             String objectName = UUID.randomUUID().toString() + extension;
             log.info("新的文件名: {}", objectName);
 
-            // 文件的请求路径
-            String filePath = aliOssUtil.upload(file.getBytes(), objectName);
-            return Result.success(filePath);
+            // 本地开发：按系统选择目录并自动创建后写入磁盘
+            String imageDir = LocalImagePathUtil.getImageDir();
+            file.transferTo(new File(imageDir + objectName));
+
+            // 返回浏览器可访问的 HTTP 地址（由静态资源映射提供）
+            // 生产环境可改回：aliOssUtil.upload(file.getBytes(), objectName)
+            String fileUrl = IMAGE_URL_PREFIX + objectName;
+            return Result.success(fileUrl);
         } catch (Exception e) {
-            log.error("文件上传失败, {}", e);
+            log.error("文件上传失败", e);
         }
 
-        return null;
+        return Result.error(MessageConstant.UPLOAD_FAILED);
     }
 }
