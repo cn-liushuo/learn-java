@@ -6,11 +6,10 @@ import com.sky.vo.DishVO;
 public interface DishService {
 
     /**
-     * 新增菜品
+     * 新增菜品和对应的口味
      *
      * @param dishDTO
-     * @return
      */
-    void save(DishDTO dishDTO);
+    void saveWithFlavor(DishDTO dishDTO);
 
 }
